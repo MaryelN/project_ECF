@@ -2,12 +2,15 @@
 
 namespace App\Entity;
 
+use App\Entity\Trait\CreatedAtTrait;
 use App\Repository\CommentRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CommentRepository::class)]
 class Comment
 {
+    use CreatedAtTrait;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -26,6 +29,11 @@ class Comment
     #[ORM\JoinColumn(nullable: false)]
     private ?rating $rating = null;
 
+    public function __construct()
+    {
+        $this-> created_at = new \DateTimeImmutable();
+    }
+    
     public function getId(): ?int
     {
         return $this->id;
@@ -78,4 +86,5 @@ class Comment
 
         return $this;
     }
+
 }
