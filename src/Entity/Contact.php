@@ -2,12 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\CommentRepository;
-use Doctrine\DBAL\Types\Types;
+use App\Repository\ContactRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: CommentRepository::class)]
-class Comment
+#[ORM\Entity(repositoryClass: ContactRepository::class)]
+class Contact
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -23,8 +22,11 @@ class Comment
     #[ORM\Column(length: 100)]
     private ?string $email = null;
 
-    #[ORM\Column(type: Types::SMALLINT)]
-    private ?int $rating = null;
+    #[ORM\Column]
+    private ?\DateTimeImmutable $created_at = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $message = null;
 
     public function getId(): ?int
     {
@@ -67,14 +69,26 @@ class Comment
         return $this;
     }
 
-    public function getRating(): ?int
+    public function getCreatedAt(): ?\DateTimeImmutable
     {
-        return $this->rating;
+        return $this->created_at;
     }
 
-    public function setRating(int $rating): static
+    public function setCreatedAt(\DateTimeImmutable $created_at): static
     {
-        $this->rating = $rating;
+        $this->created_at = $created_at;
+
+        return $this;
+    }
+
+    public function getMessage(): ?string
+    {
+        return $this->message;
+    }
+
+    public function setMessage(string $message): static
+    {
+        $this->message = $message;
 
         return $this;
     }
