@@ -2,22 +2,22 @@
 
 namespace App\Entity;
 
-use App\Repository\ContactFormRepository;
+use App\Repository\ContactRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: ContactFormRepository::class)]
-class ContactForm
+#[ORM\Entity(repositoryClass: ContactRepository::class)]
+class Contact
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 100)]
-    private ?string $name = null;
-
-    #[ORM\Column(length: 100)]
+    #[ORM\Column(length: 50)]
     private ?string $lastname = null;
+
+    #[ORM\Column(length: 50)]
+    private ?string $name = null;
 
     #[ORM\Column(length: 100)]
     private ?string $email = null;
@@ -33,18 +33,6 @@ class ContactForm
         return $this->id;
     }
 
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): static
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
     public function getLastname(): ?string
     {
         return $this->lastname;
@@ -53,6 +41,18 @@ class ContactForm
     public function setLastname(string $lastname): static
     {
         $this->lastname = $lastname;
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): static
+    {
+        $this->name = $name;
 
         return $this;
     }
