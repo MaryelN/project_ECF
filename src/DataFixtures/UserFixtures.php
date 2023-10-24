@@ -7,7 +7,7 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\String\Slugger\SluggerInterface;
-
+use Faker\Factory;
 ;
 
 class UserFixtures extends Fixture
@@ -30,6 +30,21 @@ class UserFixtures extends Fixture
         $admin->setAddress('1 rue du garage');
 
         $manager->persist($admin);
+
+        $faker = \Faker\Factory::create('fr_FR');
+
+        for($usr = 1; $usr <=5; $usr++){
+            $user = new User();
+            $user->setEmail($faker->email);
+            $user->setRoles(['ROLE_user']);
+            $user->setPassword(
+                $this->passwordEncoder->hashPassword($user, 'secret'));
+            $user->setLastname($faker->lastname);
+            $user->setName($faker->name);
+            $user->setAddress($faker->address);
+    
+            $manager->persist($user);
+        }
 
         $manager->flush();
     }
