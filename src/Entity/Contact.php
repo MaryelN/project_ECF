@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Entity\Trait\CreatedAtTrait;
+use App\Entity\Trait\MessageTrait;
 use App\Repository\ContactRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -10,6 +11,8 @@ use Doctrine\ORM\Mapping as ORM;
 class Contact
 {
     use CreatedAtTrait;
+    use MessageTrait;
+    
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -23,9 +26,6 @@ class Contact
 
     #[ORM\Column(length: 100)]
     private ?string $email = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $message = null;
 
     public function __construct()
     {
@@ -73,15 +73,4 @@ class Contact
         return $this;
     }
 
-    public function getMessage(): ?string
-    {
-        return $this->message;
-    }
-
-    public function setMessage(string $message): static
-    {
-        $this->message = $message;
-
-        return $this;
-    }
 }
