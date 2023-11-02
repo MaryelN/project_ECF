@@ -37,6 +37,10 @@ class Car
     #[ORM\JoinColumn(nullable: false)]
     private ?fuel $fuel = null;
 
+    #[ORM\ManyToOne(inversedBy: 'cars')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?brand $brand = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -122,6 +126,18 @@ class Car
     public function setFuel(?fuel $fuel): static
     {
         $this->fuel = $fuel;
+
+        return $this;
+    }
+
+    public function getBrand(): ?brand
+    {
+        return $this->brand;
+    }
+
+    public function setBrand(?brand $brand): static
+    {
+        $this->brand = $brand;
 
         return $this;
     }

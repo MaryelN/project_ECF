@@ -5,26 +5,23 @@ namespace App\DataFixtures;
 use App\Entity\Transmission;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
-;
+
 
 class TransmissionFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        $transmission = new Transmission();
-        $transmission->setName('Automatique');
-        
-        $manager->persist($transmission);
-        
-        $transmission = new Transmission();
-        $transmission->setName('Manuelle');
+        $transmissions = ['Automatique', 'Manuelle', 'Semi-automatique'];
+        $counter = 1;
 
-        $manager->persist($transmission);
-        
-        $transmission = new Transmission();
-        $transmission->setName('Semi-automatique');
+        foreach ($transmissions as $name) {
+            $transmission = new Transmission();
+            $transmission->setName($name);
+            $manager->persist($transmission);
 
-        $manager->persist($transmission);
+            $this->addReference('tran-' . $counter, $transmission);
+            $counter++;
+        }
 
         $manager->flush();
     }

@@ -5,7 +5,7 @@ namespace App\DataFixtures;
 use App\Entity\Service;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
-;
+use Faker\Factory;
 
 class ServiceFixtures extends Fixture
 {
@@ -150,7 +150,19 @@ class ServiceFixtures extends Fixture
         $service20->setDescription('Description');
 
         $manager->persist($service20);
-        
+
+        $faker = \Faker\Factory::create('fr_FR');
+
+        for($srv = 1; $srv <=3; $srv++){
+
+        $service = new Service();
+        $service->setName($faker->name);
+        $service->setPrice($faker->numberBetween(10, 100));
+        $service->setDescription($faker->text); 
+
+        $manager->persist($service);
+        }
+
         $manager->flush();
     }
 }

@@ -5,31 +5,23 @@ namespace App\DataFixtures;
 use App\Entity\Fuel;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
-;
+
 
 class FuelFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        $fuel1 = new Fuel();
-        $fuel1->setName('Essence');
+        $fuels = ['Essence', 'Diesel', 'Hybride', 'Electrique'];
+        $counter = 1;
 
-        $manager->persist($fuel1);
+        foreach ($fuels as $name) {
+            $fuel = new Fuel();
+            $fuel->setName($name);
+            $manager->persist($fuel);
 
-        $fuel2 = new Fuel();
-        $fuel2->setName('Diesel');
-
-        $manager->persist($fuel2);
-        
-        $fuel3 = new Fuel();
-        $fuel3->setName('Hybride');
-
-        $manager->persist($fuel3);
-        
-        $fuel4 = new Fuel();
-        $fuel4->setName('Electrique');
-
-        $manager->persist($fuel4);
+            $this->addReference('fuel-' . $counter, $fuel);
+            $counter++;
+        }
 
         $manager->flush();
     }
