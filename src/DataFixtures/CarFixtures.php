@@ -49,9 +49,24 @@ class CarFixtures extends Fixture implements DependentFixtureInterface
         $car1 = new Car();
         $car1->setName('Mercedes-Benz CLA 220');
         $car1->setCarYear($yearValue);
-        $car1->setKm($kmValue);
+        $car1->setKm('48321');
         $car1->setPrice($priceValue);
-        $car1->setDescription($descriptionValue);
+        $description = "Détails du véhicule
+        <ul>
+            <li>Catégorie Routière</li>
+            <li>Année 2018</li>
+            <li>Kilométrage 48321km</li>
+            <li>Boîte de vitesses Automatique</li>
+            <li>Puissance DIN 381 ch</li>
+            <li>Puissance fiscale 26CV</li>
+            <li>Énergie Essence</li>
+            <li>Couleur Blanc</li>
+            <li>Intérieur Autre</li>
+            <li>Portières 4</li>
+            <li>Sièges 5</li>
+        </ul>";
+
+        $car1->setDescription($description);
         $car1->setTransmission($tranAutomatique); 
         $car1->setBrand($brand1); 
         $car1->setFuel($fuelEssence);
@@ -63,8 +78,9 @@ class CarFixtures extends Fixture implements DependentFixtureInterface
         $car2->setCarYear('2019');
         $car2->setKm('20189');
         $car2->setPrice('18980');
-        $description = "Catégorie Routière
+        $description = "Détails du véhicule
         <ul>
+            <li>Catégorie Routière</li>
             <li>Année 2019</li>
             <li>Kilométrage 20189km</li>
             <li>Boîte de vitesses Manuelle</li>
@@ -106,7 +122,7 @@ class CarFixtures extends Fixture implements DependentFixtureInterface
         </ul>";
         $car3->setDescription($description);
         $car3->setTransmission($tranAutomatique); 
-        $car->setBrand($brand2);
+        $car3->setBrand($brand2);
         $car3->setFuel($fuelEssence);
 
         $manager->persist($car3);
@@ -138,6 +154,7 @@ class CarFixtures extends Fixture implements DependentFixtureInterface
         $car4->setFuel($fuelElectric);
 
         $manager->persist($car4);
+    
 
         $manager->flush();
     }
