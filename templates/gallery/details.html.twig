@@ -8,21 +8,24 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
-<div class="example-wrapper">
-    <h1>Details de {{car.name}}</h1>
-    <p>ceci est la page de details de la galerie</p>
-    <div class="card mb-3">
-      <img src="" class="card-img-top" alt="...">
-      <div class="card-body">
-<p class="card-text text-body-primary">Prix : {{car.price}}</p>
-<p class="card-text text-body-primary">{{car.brand.name}}</p>
-<p class="card-text text-body-primary">{{car.km}} km</p>
-<p class="card-text text-body-primary">{{car.fuel.name}} </p>
-<p class="card-text text-body-primary">Transmission : {{car.transmission.name}}</p>
-  <p>Description: {{ car.description | raw }}</p>
-<button>Contact us</button>
-      </div>
+<div class" container">
+  <button class=" btn btn-primary mx-auto">Revenir</button>
+  <div class=" my-5">
+      <h1 class="text-center">Details de {{car.name}}</h1>
+  </div>
+  <div class="card mx-5 px-3">
+    <img src="" class="card-img-top" alt="...">
+    <div class="card-body">
+      <p class="card-text text-body-primary">Prix : {{car.price}}</p>
+      <p class="card-text text-body-primary">Année : {{car.carYear}}</p>
+      <p class="card-text text-body-primary">{{car.brand.name}}</p>
+      <p class="card-text text-body-primary">{{car.km}} km</p>
+      <p class="card-text text-body-primary">{{car.fuel.name}} </p>
+      <p class="card-text text-body-primary">Transmission : {{car.transmission.name}}</p>
+      <p>Description: {{ car.description | raw }}</p>
+      <button class=" btn btn-primary mx-auto">Contact us</button>
     </div>
+    </div>
+  </div>
     
-</div>
 {% endblock %}

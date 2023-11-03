@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Car;
+use App\Repository\CarRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -11,11 +12,13 @@ use Symfony\Component\Routing\Annotation\Route;
 class GalleryController extends AbstractController
 {
     #[Route('/', name:'index')]
-    public function index(): Response
-    {                                       
+    public function index(CarRepository $carRepository): Response
+    {        
+        $cars = $carRepository->findBy([], ['id' => 'DESC']);                               
         return $this->render('gallery/index.html.twig', [
             'controller_name' => 'GalleryController',
-            'title'=>'Gallerie' 
+            'title'=>'Gallerie',
+            'cars'=> $cars 
         ]);
     }
     
