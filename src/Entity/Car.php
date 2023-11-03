@@ -31,15 +31,15 @@ class Car
 
     #[ORM\ManyToOne(inversedBy: 'cars')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?transmission $transmission = null;
+    private ?Transmission $transmission = null;
 
     #[ORM\ManyToOne(inversedBy: 'cars')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?fuel $fuel = null;
+    private ?Fuel $fuel = null;
 
     #[ORM\ManyToOne(inversedBy: 'cars')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?brand $brand = null;
+    private ?Brand $brand = null;
 
     public function getId(): ?int
     {
