@@ -8,6 +8,8 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: CommentRepository::class)]
 class Comment
 {
+    use Trait\CreatedAtTrait;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -25,6 +27,11 @@ class Comment
     #[ORM\ManyToOne(inversedBy: 'comments')]
     #[ORM\JoinColumn(nullable: false)]
     private ?rating $rating = null;
+
+    public function __construct()
+    {
+        $this->created_at = new \DateTimeImmutable();   
+    }
 
     public function getId(): ?int
     {
