@@ -12,7 +12,7 @@ class Contact
 {
     use CreatedAtTrait;
     use MessageTrait;
-    
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
