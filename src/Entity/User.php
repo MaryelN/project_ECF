@@ -41,6 +41,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 150, nullable: true)]
     private ?string $address = null;
 
+    #[ORM\Column(type: 'boolean')]
+    private $is_verified = false;
+
     public function __construct()
     {
         $this->created_at = new \DateTimeImmutable();
@@ -148,6 +151,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setAddress(?string $address): static
     {
         $this->address = $address;
+
+        return $this;
+    }
+
+    public function getIsVerified(): ?bool
+    {
+        return $this->is_verified;
+    }
+
+    public function setIsVerified(?bool $is_verified): self
+    {
+        $this->is_verified = $is_verified;
 
         return $this;
     }
