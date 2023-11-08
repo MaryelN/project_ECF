@@ -14,11 +14,11 @@ class Car
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 150)]
+    #[ORM\Column(length: 50)]
     private ?string $name = null;
 
-    #[ORM\Column]
-    private ?int $year = null;
+    #[ORM\Column(type: Types::SMALLINT)]
+    private ?int $car_year = null;
 
     #[ORM\Column]
     private ?int $km = null;
@@ -26,13 +26,20 @@ class Car
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
     private ?string $price = null;
 
-    #[ORM\ManyToOne(inversedBy: 'cars')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?fuel $fuel = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $description = null;
 
     #[ORM\ManyToOne(inversedBy: 'cars')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?transmission $transmission = null;
+    private ?Transmission $transmission = null;
+
+    #[ORM\ManyToOne(inversedBy: 'cars')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Fuel $fuel = null;
+
+    #[ORM\ManyToOne(inversedBy: 'cars')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Brand $brand = null;
 
     public function getId(): ?int
     {
@@ -51,14 +58,14 @@ class Car
         return $this;
     }
 
-    public function getYear(): ?int
+    public function getCarYear(): ?int
     {
-        return $this->year;
+        return $this->car_year;
     }
 
-    public function setYear(int $year): static
+    public function setCarYear(int $car_year): static
     {
-        $this->year = $year;
+        $this->car_year = $car_year;
 
         return $this;
     }
@@ -87,14 +94,14 @@ class Car
         return $this;
     }
 
-    public function getFuel(): ?fuel
+    public function getDescription(): ?string
     {
-        return $this->fuel;
+        return $this->description;
     }
 
-    public function setFuel(?fuel $fuel): static
+    public function setDescription(?string $description): static
     {
-        $this->fuel = $fuel;
+        $this->description = $description;
 
         return $this;
     }
@@ -107,6 +114,30 @@ class Car
     public function setTransmission(?transmission $transmission): static
     {
         $this->transmission = $transmission;
+
+        return $this;
+    }
+
+    public function getFuel(): ?fuel
+    {
+        return $this->fuel;
+    }
+
+    public function setFuel(?fuel $fuel): static
+    {
+        $this->fuel = $fuel;
+
+        return $this;
+    }
+
+    public function getBrand(): ?brand
+    {
+        return $this->brand;
+    }
+
+    public function setBrand(?brand $brand): static
+    {
+        $this->brand = $brand;
 
         return $this;
     }

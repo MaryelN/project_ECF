@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Gallerie de Voitures{% endblock %}
+{% block title %}Voitures d'occasion{% endblock %}
 
 {% block body %}
 <style>
@@ -8,13 +8,31 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
-<div class="example-wrapper">
-    <h1>Gallerie de Voitures</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/marye/OneDrive/Desktop/symfony-test/project-5/Project_ECF/src/Controller/GalleryController.php'|file_link(0) }}">src/Controller/GalleryController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/marye/OneDrive/Desktop/symfony-test/project-5/Project_ECF/templates/gallery/index.html.twig'|file_link(0) }}">templates/gallery/index.html.twig</a></code></li>
-    </ul>
-</div>
+<section>
+    <div class="text-center mt-3 py-3">
+        <h1>Voitures d'Occasion </h1>
+    </div>
+    <div class="container d-flex">
+        <div class="row">
+            {% for car in cars %}
+            <div class="col px-3 py-3">
+                <div class="card" style="width: 18rem; height: 30rem;">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Card {{ car.name }}</h5>
+                        <ul class="card-text">
+                            <li>Année :{{ car.carYear }}</li>
+                            <li>{{ car.brand.name }}</li>
+                            <li>{{ car.km }} km</li>
+                            <li>{{ car.fuel.name }}</li>
+                            <li>Transmission : {{ car.transmission.name }}</li>
+                        </ul>
+                        <a href="{{ path('app_gallery_details',{id: car.id}) }}" class="btn btn-primary mx-auto">Plus d'information</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
 {% endblock %}
