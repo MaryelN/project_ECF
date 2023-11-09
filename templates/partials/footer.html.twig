@@ -35,11 +35,13 @@
       
         <div class="col d-flex justify-content-center align-items-center">
           <ul class="nav  d-flex">
-            <li class="nav-item mx-2"><a href="#" class="nav-link p-0 text-white">Accuel</a></li>
-            <li class="nav-item mx-2"><a href="#" class="nav-link p-0 text-white">Services</a></li>
-            <li class="nav-item mx-2"><a href="#" class="nav-link p-0 text-white">Vente de voitures</a></li>
+            <li class="nav-item mx-2"><a href=""{{path('app_home')}}"" class="nav-link p-0 text-white">Accuel</a></li>
+            <li class="nav-item mx-2"><a href="{{ path('app_home') }}#services" class="nav-link p-0 text-white">Services</a></li>
+            <li class="nav-item mx-2"><a href="{{path('app_gallery_index')}}" class="nav-link p-0 text-white">Vente de voitures</a></li>
           </ul>
-          <button class="btn btn-primary" type="button">Contacter</button>
+          <a href="{{path('app_contact')}}">
+            <button class="btn btn-primary" type="button">Contacter</button>
+          </a>
         </div>
       </div>
     
