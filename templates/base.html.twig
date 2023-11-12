@@ -21,17 +21,19 @@
         {% include "partials/_header.html.twig" %}
         {% include "partials/_flash.html.twig" %}
         <div class="flex-grow-1">
-        {% if app.user and app.user.isVerified == false %}
+            {% if app.user and app.user.isVerified == false %}
             <div class="alert alert-warning alert-dismissible" role="alert">
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                 <div class="alert-message">
                     <strong>Votre compte n'est pas activé</strong> renvoyer le lien d'activation
                 </div>
             </div>
-        {% endif %}
-        {% block body %}
-        
-        {% endblock %}
+            {% endif %}
+
+            {% include "_partial/_flash.html.twig" %}  
+            {% block body %}
+            
+            {% endblock %}
         </div>
         {% include "partials/_footer.html.twig" %}
     </body>
