@@ -72,5 +72,5 @@ class Contact
 
         return $this;
     }
-
+    
 }

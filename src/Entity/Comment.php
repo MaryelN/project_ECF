@@ -11,8 +11,6 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: CommentRepository::class)]
 class Comment
 {
-    use Trait\CreatedAtTrait;
-
     use CreatedAtTrait;
     use MessageTrait;
 
@@ -90,4 +88,6 @@ class Comment
 
         return $this;
     }
+
+
 }
