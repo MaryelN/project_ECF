@@ -16,6 +16,7 @@ class ContactController extends AbstractController
     public function sendMessage(Request $request, EntityManagerInterface $manager): Response
     {
         $contact = new Contact();
+
         $form = $this->createForm(ContactType::class, $contact);
         $form->handleRequest($request);
         
