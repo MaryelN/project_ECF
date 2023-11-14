@@ -30,10 +30,6 @@ class ContactController extends AbstractController
             $email = (new TemplatedEmail())
             ->from($contact->getEmail())
             ->to('admin@garage.com')
-            //->cc('cc@example.com')
-            //->bcc('bcc@example.com')
-            //->replyTo('fabien@example.com')
-            //->priority(Email::PRIORITY_HIGH)
             ->subject($contact->getSubject())
             ->htmlTemplate('emails/contact.html.twig')
 
