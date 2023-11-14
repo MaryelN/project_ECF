@@ -27,6 +27,12 @@ class Contact
     #[ORM\Column(length: 100)]
     private ?string $email = null;
 
+    #[ORM\Column(length: 150)]
+    private ?string $subject = null;
+    
+    #[ORM\Column(length: 150, nullable: true)]
+    private ?string $carName = null;
+
     public function __construct()
     {
         $this->created_at = new \DateTimeImmutable();
@@ -69,6 +75,30 @@ class Contact
     public function setEmail(string $email): static
     {
         $this->email = $email;
+
+        return $this;
+    }
+    
+    public function getSubject(): ?string
+    {
+        return $this->subject;
+    }
+
+    public function setSubject(string $subject): static
+    {
+        $this->subject = $subject;
+
+        return $this;
+    }
+
+    public function getCarName(): ?string
+    {
+        return $this->carName;
+    }
+
+    public function setCarName(?string $carName): static
+    {
+        $this->carName = $carName;
 
         return $this;
     }
