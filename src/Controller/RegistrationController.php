@@ -78,6 +78,7 @@ class RegistrationController extends AbstractController
             if ($user && !$user->getIsVerified()){
                 $user->setIsVerified(true);
                 $em->flush($user);
+                
                 $this->addFlash('succes','Votre compte a bien été verifié');
                 return $this->redirectToRoute('app_home');
             }
