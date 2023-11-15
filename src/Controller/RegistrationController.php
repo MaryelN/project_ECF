@@ -64,7 +64,7 @@ class RegistrationController extends AbstractController
             );
         }
 
-        return $this->render('registration/register.html.twig', [
+        return $this->render('pages/registration/register.html.twig', [
             'registrationForm' => $form->createView(),
         ]);
     }
@@ -78,6 +78,7 @@ class RegistrationController extends AbstractController
             if ($user && !$user->getIsVerified()){
                 $user->setIsVerified(true);
                 $em->flush($user);
+                
                 $this->addFlash('succes','Votre compte a bien été verifié');
                 return $this->redirectToRoute('app_home');
             }

@@ -3,9 +3,8 @@
 {% block title %}{{title}}{% endblock %}
 
 {% block body %}
-
-
 <section class="vh-90">
+    <a href="{{ path('app_gallery_details',{id: car.id})}}" class=" btn btn-primary mx-auto">Retour</a>
     <div class="row d-flex justify-content-center align-items-center h-90 mt-5">
         <div class="col-12 col-md-9 col-lg-7 col-xl-6">
             <div class="card" style="border-radius: 15px;">

@@ -1,0 +1,13 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+  </head>
+  <h1>Demande N° {{ contact.id }}</h1>
+  <h4>Client : {{ contact.lastname }} {{ contact.name }}</h4>
+  <h5> E-mail : {{ contact.email }}</h5>
+  <h5>Sujet : {{ contact.subject }}</h5>
+  <div>
+    {{ contact.message|raw }} 
+  </div>
+  </body>
+</html>

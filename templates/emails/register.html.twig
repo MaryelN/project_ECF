@@ -1,4 +1,11 @@
-<h1>Activez votre compte</h1>
-<p> Bienvenue {{ user.name }}</p>
-<p>Validez votre compte en cliquant sur le lien ci-dessous</p>
-<p><a href="{{ absolute_url(path('app_verify', {token: token})) }}">Valider</a></p>
+<html>
+  <head>
+    <meta charset="UTF-8">
+  </head>
+  <body>
+    <h1> Bienvenue  {{ user.lastname }} {{ user.name }}</h1>
+    <h3>Activez votre compte</h3>
+    <p>Validez votre compte en cliquant sur le lien ci-dessous</p>
+    <p><a href="{{ absolute_url(path('app_verify', {token: token})) }}">Valider</a></p>
+  </body>
+</html>
