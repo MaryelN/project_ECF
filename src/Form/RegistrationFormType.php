@@ -20,16 +20,53 @@ class RegistrationFormType extends AbstractType
     {
         $builder
         ->add('email', EmailType::class, [
-            'attr' => ['class' => 'form-control'],
-            'label' => 'E-mail'
+            'attr' => [
+                'class' => 'form-control',
+                'min' => 5,
+                'max' => 100
+            ],
+            'label' => 'E-mail',
+            'constraints'=> [
+                new NotBlank([
+                    'message' => 'Veuillez saisir un e-mail'
+                ]),
+                new Length([
+                    'min' => 5,
+                    'max' => 100,
+                    'minMessage' => 'Veuillez saisir un e-mail valide',
+                    'maxMessage' => 'Veuillez saisir un e-mail valide'
+                ])
+                ]
             ])
         ->add('lastname', TextType::class, [
             'attr' => ['class' => 'form-control'],
-            'label' => 'Nom'
+            'label' => 'Nom',
+            'constraints'=> [
+                new NotBlank([
+                    'message' => 'Veuillez saisir un nom'
+                ]),
+                new Length([
+                    'min' => 2,
+                    'max' => 50,
+                    'minMessage' => 'Veuillez saisir un nom valide',
+                    'maxMessage' => 'Veuillez saisir un nom valide'
+                ])
+                ]
             ])
         ->add('name', TextType::class, [
             'attr' => ['class' => 'form-control'],
-            'label' => 'Prénom'
+            'label' => 'Prénom',
+            'constraints'=> [
+                new NotBlank([
+                    'message' => 'Veuillez saisir un nom'
+                ]),
+                new Length([
+                    'min' => 2,
+                    'max' => 50,
+                    'minMessage' => 'Veuillez saisir un prénom valide',
+                    'maxMessage' => 'Veuillez saisir un prénom valide'
+                ])
+                ]
             ])
         ->add('address', TextType::class, [
             'attr' => ['class' => 'form-control'],
