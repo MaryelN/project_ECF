@@ -8,6 +8,7 @@ use App\Form\ContactType;
 use App\Repository\CarRepository;
 use App\Service\SendMailService;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,9 +18,19 @@ use Symfony\Component\Routing\Annotation\Route;
 class GalleryController extends AbstractController
 {
     #[Route('/', name:'index')]
-    public function index(CarRepository $carRepository): Response
+    public function index(
+        CarRepository $carRepository, 
+        PaginatorInterface $paginator, 
+        Request $request): Response
     {        
-        $cars = $carRepository->findBy([], ['id' => 'DESC']);                               
+        
+        
+        $cars = $paginator->paginate(
+            $carRepository->findAll(),
+            $request->query->getInt('page', 1),
+            6 /* limit */
+        );
+
         return $this->render('pages/gallery/index.html.twig', [
             'controller_name' => 'GalleryController',
             'title'=>'Gallerie',
