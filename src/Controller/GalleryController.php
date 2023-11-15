@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Car;
 use App\Entity\Contact;
-use App\Form\ContactCarType;
+use App\Form\ContactType;
 use App\Repository\CarRepository;
 use App\Service\SendMailService;
 use Doctrine\ORM\EntityManagerInterface;
@@ -42,17 +42,12 @@ class GalleryController extends AbstractController
     {
         $contact = new Contact();
 
-        $form = $this->createForm(ContactCarType::class, $contact, [
-            'subject' => $car->getName()
-        ]);
-
+        $form = $this->createForm(ContactType::class, $contact);
+        $form->get('subject')->setData($car->getName());
         $form->handleRequest($request);
         
         if($form->isSubmitted() && $form->isValid()){
             $contact = $form->getData();
-
-            $carName = $car->getName();
-            // $contact->setSubject($carName);
 
             $manager->persist($contact);
             $manager->flush();
@@ -61,7 +56,7 @@ class GalleryController extends AbstractController
             $contact->getEmail(),
             'admin@garage.com',
             $contact->getSubject(),
-            $template = 'contactCar',
+            $template = 'contact',
             compact('contact', 'car')
             );
 

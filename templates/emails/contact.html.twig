@@ -2,12 +2,12 @@
   <head>
     <meta charset="UTF-8">
   </head>
-  <body>
-    <h1>Demande de : {{ contact.lastname }} {{ contact.name }}</h1>
-    <p> E-mail : {{ contact.email }}</p>
-    <p>Sujet : {{ contact.subject }}</p>
-    <div>
-      {{ contact.message|raw }} 
-    </div>
+  <h1>Demande N° {{ contact.id }}</h1>
+  <h4>Client : {{ contact.lastname }} {{ contact.name }}</h4>
+  <h5> E-mail : {{ contact.email }}</h5>
+  <h5>Sujet : {{ contact.subject }}</h5>
+  <div>
+    {{ contact.message|raw }} 
+  </div>
   </body>
 </html>
