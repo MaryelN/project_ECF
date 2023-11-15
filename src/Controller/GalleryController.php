@@ -20,7 +20,7 @@ class GalleryController extends AbstractController
     public function index(CarRepository $carRepository): Response
     {        
         $cars = $carRepository->findBy([], ['id' => 'DESC']);                               
-        return $this->render('gallery/index.html.twig', [
+        return $this->render('pages/gallery/index.html.twig', [
             'controller_name' => 'GalleryController',
             'title'=>'Gallerie',
             'cars'=> $cars 
@@ -30,7 +30,7 @@ class GalleryController extends AbstractController
     #[Route('/{id}', name:'details')]
     public function details(Car $car): Response
     {                                   
-        return $this->render('gallery/details.html.twig', [
+        return $this->render('pages/gallery/details.html.twig', [
             'controller_name' => 'GalleryController',
             'title'=>'Details',
             'car'=>$car 
@@ -62,10 +62,10 @@ class GalleryController extends AbstractController
 
             $this->addFlash('success', 'Votre message a bien été envoyé !');
 
-            return $this->redirectToRoute('app_gallery_index');
+            return $this->redirectToRoute('pages/app_gallery_index');
         }
         
-        return $this->render('gallery/contact.html.twig', [
+        return $this->render('pages/gallery/contact.html.twig', [
             'form' => $form->createView(),
             'title' => 'Contactez-nous',
             'car' => $car

@@ -13,7 +13,7 @@ class HomeController extends AbstractController
     public function index(CommentRepository $commentRepository): Response
     {
         $comments = $commentRepository->findBy(['rating'=> 5],[ 'id' => 'DESC'], 3);
-        return $this->render('home/index.html.twig', [
+        return $this->render('pages/home/index.html.twig', [
             'controller_name' => 'HomeController',
             'comments' => $comments,
             'title' => 'Garage V. Parrot'

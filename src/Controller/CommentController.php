@@ -30,7 +30,7 @@ class CommentController extends AbstractController
             return $this->redirectToRoute('app_home');
         }
         
-        return $this->render('comment/index.html.twig', [
+        return $this->render('pages/comment/index.html.twig', [
             'form' => $form->createView(),
             'title' => 'Commentaires',
         ]);
