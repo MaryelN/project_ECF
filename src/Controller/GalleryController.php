@@ -73,7 +73,7 @@ class GalleryController extends AbstractController
 
             $this->addFlash('success', 'Votre message a bien été envoyé !');
 
-            return $this->redirectToRoute('pages/app_gallery_index');
+            return $this->redirectToRoute('app_gallery_index');
         }
         
         return $this->render('pages/gallery/contact.html.twig', [
