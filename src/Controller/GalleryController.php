@@ -28,7 +28,7 @@ class GalleryController extends AbstractController
         $cars = $paginator->paginate(
             $carRepository->findAll(),
             $request->query->getInt('page', 1),
-            6 /* limit */
+            6 
         );
 
         return $this->render('pages/gallery/index.html.twig', [

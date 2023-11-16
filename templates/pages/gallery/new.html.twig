@@ -1,16 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Voitures d'occasion {{ title }}{% endblock %}
+{% block title %}{{ title }}{% endblock %}
 {% block stylesheets %}{{ parent() }}{% endblock %}
 {% block body %}
-
+<a href="{{ path('app_gallery_index') }}" class="btn btn-primary mx-auto">Retour</a>
     <section class="vh-90">
         <div class="row d-flex justify-content-center align-items-center h-90 mt-5">
             <div class="col-12 col-md-9 col-lg-7 col-xl-6">
                 <div class="card" style="border-radius: 15px;">
                     <div class="card-body p-5">
-                        <h2 class="text-uppercase text-center mb-5">Ajouter un nouveau véhicule d'occasion</h2>
-                        {{ form(form, {'method': 'POST'}) }}
+                        <h2 class="text-uppercase text-center mb-5">{{title}}</h2>
+                        {{ form(form) }}
                     </div>
                 </div>
             </div>
