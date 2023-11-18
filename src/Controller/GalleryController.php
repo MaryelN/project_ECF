@@ -2,10 +2,10 @@
 
 namespace App\Controller;
 
-use App\Entity\Car;
+use App\Entity\Car\Car;
 use App\Entity\Contact;
 use App\Form\ContactType;
-use App\Repository\CarRepository;
+use App\Repository\Car\CarRepository;
 use App\Service\SendMailService;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
