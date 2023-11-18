@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Entity\Trait\CreatedAtTrait;
+use App\Entity\Trait\IsVerifiedTrait;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -14,6 +15,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     use CreatedAtTrait;
+    use isVerifiedTrait;
     
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -40,9 +42,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 150, nullable: true)]
     private ?string $address = null;
-
-    #[ORM\Column(type: 'boolean')]
-    private $is_verified = false;
 
     public function __construct()
     {
@@ -155,16 +154,5 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getIsVerified(): ?bool
-    {
-        return $this->is_verified;
-    }
-
-    public function setIsVerified(?bool $is_verified): self
-    {
-        $this->is_verified = $is_verified;
-
-        return $this;
-    }
 
 }

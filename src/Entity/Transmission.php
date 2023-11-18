@@ -72,4 +72,9 @@ class Transmission
 
         return $this;
     }
+
+    public function __toString()
+{
+    return $this->getName(); // Replace with the actual property you want to display
+}
 }
