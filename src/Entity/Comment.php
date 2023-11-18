@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Entity\Trait\CreatedAtTrait;
+use App\Entity\Trait\IsVerifiedTrait;
 use App\Entity\Trait\MessageTrait;
 use App\Repository\CommentRepository;
 use Doctrine\DBAL\Types\Types;
@@ -13,6 +14,7 @@ class Comment
 {
     use CreatedAtTrait;
     use MessageTrait;
+    use IsVerifiedTrait;
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
