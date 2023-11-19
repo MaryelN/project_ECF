@@ -35,18 +35,16 @@ class ThumbnailCrudController extends AbstractCrudController
             IdField::new('id')
                 ->hideOnForm()
                 ->hideOnIndex(),
-            TextField::new('imageName')
-                ->setLabel('Nom de l\'image'),
+            // TextField::new('imageName')
+            //     ->setLabel('Nom de l\'image'),
             AssociationField::new('car')
                 ->setLabel('Nom de la voiture')
                 ->setCrudController(CarCrudController::class)
                 ->setHelp('Choisissez la voiture'),
-            ImageField::new('imageFile')
-                ->setLabel('Image')
-                ->setBasePath('/uploads/images')
-                ->setUploadDir('public/uploads/images') 
-                ->setUploadedFileNamePattern('[randomhash].[extension]')
-                ->setRequired(false),
+            ImageField::new('imageName')
+                ->setFormType(VichImageType::class)
+                ->setLabel('Image'),
+                // ->setUploadDir('public/uploads/images/cars'),
             IntegerField::new('imageSize')
                 ->hideOnForm()
                 ->hideOnIndex()
