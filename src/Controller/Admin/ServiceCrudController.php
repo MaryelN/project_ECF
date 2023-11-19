@@ -20,7 +20,7 @@ class ServiceCrudController extends AbstractCrudController
     {
         return $crud
             ->setEntityLabelInPlural('Services')
-            ->setEntityLabelInSingular('Services')
+            ->setEntityLabelInSingular('Service')
             ->setPageTitle(Crud::PAGE_INDEX, 'Liste des %entity_label_plural%')
             ->setPaginatorPageSize(10);
     }

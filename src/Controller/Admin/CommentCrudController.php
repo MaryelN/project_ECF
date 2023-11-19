@@ -22,8 +22,8 @@ class CommentCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setEntityLabelInPlural('Commentaire')
-            ->setEntityLabelInSingular('Commenaires')
+            ->setEntityLabelInPlural('Commentaires')
+            ->setEntityLabelInSingular('Commenaire')
             ->setPageTitle(Crud::PAGE_INDEX, 'Liste des %entity_label_plural%')
             ->setPaginatorPageSize(10);
     }
