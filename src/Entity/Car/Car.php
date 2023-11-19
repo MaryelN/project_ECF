@@ -2,12 +2,14 @@
 
 namespace App\Entity\Car;
 
-use App\Entity\Trait\CreatedAtTrait;
-use App\Repository\Car\CarRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Entity\Images;
+use Cocur\Slugify\Slugify;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Trait\CreatedAtTrait;
+use App\Repository\Car\CarRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 use symfony\component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CarRepository::class)]
@@ -64,14 +66,24 @@ class Car
     
     #[ORM\Column(type: 'datetime_immutable')]
     private ?\DateTimeImmutable $updatedAt = null;
+
+    #[ORM\OneToMany(mappedBy: 'car', targetEntity: Images::class, orphanRemoval: true)]
+    private Collection $images;
     
     public function __construct()
     {
         $this->created_at = new \DateTimeImmutable();
         $this->updatedAt = new \DateTimeImmutable();
         $this->thumbnails = new ArrayCollection();
+        $this->images = new ArrayCollection();
     }
 
+    #[ORM\PrePersist]
+    public function prePersist()
+    {
+        $this->slug = (new Slugify())->slugify($this->name);
+    }
+    
     #[ORM\PreUpdate]
     public function preUpdate()
     {
@@ -215,6 +227,36 @@ class Car
             }
         }
     
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Images>
+     */
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+
+    public function addImage(Images $image): static
+    {
+        if (!$this->images->contains($image)) {
+            $this->images->add($image);
+            $image->setCar($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImage(Images $image): static
+    {
+        if ($this->images->removeElement($image)) {
+            // set the owning side to null (unless already changed)
+            if ($image->getCar() === $this) {
+                $image->setCar(null);
+            }
+        }
+
         return $this;
     }
 }
