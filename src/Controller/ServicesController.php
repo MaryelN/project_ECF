@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\ScheduleRepository;
 use App\Repository\ServiceRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,9 +16,11 @@ class ServicesController extends AbstractController
     public function index(
         ServiceRepository $serviceRepository, 
         PaginatorInterface $paginator,
+        ScheduleRepository $schedulerepository,
         Request $request
         ): Response
     {
+        $schedules = $schedulerepository->findBy([], ['id' => 'ASC']);
         $data = $serviceRepository->findBy([], ['id' => 'ASC']);
         $services = $paginator->paginate(
             $data,
@@ -28,6 +31,7 @@ class ServicesController extends AbstractController
         return $this->render('pages/services/index.html.twig', [
             'controller_name' => 'ServicesController',
             'services'=>$services,
+            'schedules'=>$schedules,
             'title'=>'Services'
         ]);
     }

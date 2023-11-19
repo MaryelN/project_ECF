@@ -18,13 +18,20 @@
         <div class="col">
           <img src="assets/icons/hour.svg" alt="hour icon">
           <h5 class="mt-3">Horaires</h5>
-          <ul class="nav flex-column mt-3">
-            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-white">Home</a></li>
-            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-white">Features</a></li>
-            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-white">Pricing</a></li>
-            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-white">FAQs</a></li>
-            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-white">About</a></li>
-          </ul>
+          <div clas="row">
+            {# {% for formattedSchedule in formattedSchedules %}
+              <div class="row row">
+                <div class="col">
+                  <p class="nav-item mb-2">{{ formattedSchedule.dayName }}</p>
+                  <ul>
+                    <li class="nav-item mb-2">{{ formattedSchedule.openingAm }} - {{ formattedSchedule.closingAm }}</li>
+                    <li class="nav-item mb-2">{{ formattedSchedule.openingPm }} - {{ formattedSchedule.closingPm }}</li>
+                  </ul>
+                </div>
+              </div>
+              {% endfor %} #}
+            </div>
+        </div>
         </div>
       </div>
     </div>
@@ -35,11 +42,11 @@
       
         <div class="col d-flex justify-content-center align-items-center">
           <ul class="nav  d-flex">
-            <li class="nav-item mx-2"><a href="#" class="nav-link p-0 text-white">Accuel</a></li>
-            <li class="nav-item mx-2"><a href="#" class="nav-link p-0 text-white">Services</a></li>
-            <li class="nav-item mx-2"><a href="#" class="nav-link p-0 text-white">Vente de voitures</a></li>
+            <li class="nav-item mx-2"><a href="{{ path('app_home') }}" class="nav-link p-0 text-white">Accueil</a></li>
+            <li class="nav-item mx-2"><a href="{{ path('app_services') }}" class="nav-link p-0 text-white">Services</a></li>
+            <li class="nav-item mx-2"><a href="{{ path('app_gallery_index') }}" class="nav-link p-0 text-white">Vente de voitures</a></li>
           </ul>
-          <button class="btn btn-primary" type="button">Contacter</button>
+          <a href="{{ path('app_contact') }}" class="btn btn-primary" type="button">Contacter</a>
         </div>
       </div>
     
