@@ -23,7 +23,7 @@ class Thumbnail
     #[Vich\UploadableField(mapping: "voitures_image", fileNameProperty: "imageName", size: "imageSize")]
     private ?File $imageFile = null;
 
-    #[ORM\Column(type:'string')]
+    #[ORM\Column(type:'string', length: 255, nullable: true)]
     private ?string $imageName = null;
     
     #[ORM\Column(type: 'integer', nullable: true)]
