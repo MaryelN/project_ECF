@@ -80,7 +80,7 @@ class RegistrationController extends AbstractController
                 $em->flush($user);
                 
                 $this->addFlash('succes','Votre compte a bien été verifié');
-                return $this->redirectToRoute('app_home');
+                return $this->redirectToRoute('admin');
             }
         } 
         $this->addFlash('danger','Le token est invalide ou a expiré');
@@ -99,7 +99,7 @@ class RegistrationController extends AbstractController
 
         if ($user->getIsVerified()){
             $this->addFlash('warning','Votre compte est déjà vérifié');
-            return $this->redirectToRoute('app_home');
+            return $this->redirectToRoute('admin');
         }
 
         $header = [

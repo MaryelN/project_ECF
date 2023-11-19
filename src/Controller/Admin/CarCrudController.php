@@ -2,10 +2,7 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Car;
-use App\Repository\BrandRepository;
-use App\Repository\FuelRepository;
-use App\Repository\TransmissionRepository;
+use App\Entity\Car\Car;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
@@ -24,8 +21,8 @@ class CarCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setEntityLabelInPlural('Voiture')
-            ->setEntityLabelInSingular('Voitures')
+            ->setEntityLabelInPlural('Voitures')
+            ->setEntityLabelInSingular('Voiture')
             ->setPageTitle(Crud::PAGE_INDEX, 'Liste des %entity_label_plural%')
             ->setPaginatorPageSize(10);
     }

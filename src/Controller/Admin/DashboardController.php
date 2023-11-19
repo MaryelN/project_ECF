@@ -2,8 +2,9 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Brand;
-use App\Entity\Car;
+use App\Entity\Car\Brand;
+use App\Entity\Car\Car;
+use App\Entity\Car\Thumbnail;
 use App\Entity\Contact;
 use App\Entity\Schedule;
 use App\Entity\Service;
@@ -20,6 +21,10 @@ class DashboardController extends AbstractDashboardController
     #[Route('/admin', name: 'admin')]
     public function index(): Response
     {
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('app_login');
+        }
+        
         return $this->render('admin/dashboard.html.twig');
     }
 
@@ -43,8 +48,10 @@ class DashboardController extends AbstractDashboardController
             MenuItem::linkToCrud('Messages', 'fa fa-envelope', Contact::class),
             MenuItem::linkToCrud('Commentaires', 'fa fa-comment', Comment::class),
             MenuItem::linkToCrud('Services', 'fa fa-wrench', Service::class),
+            MenuItem::section('Voitures d\'Occasion'),
             MenuItem::linkToCrud('Annonces de Voitures', 'fa fa-car', Car::class),
-            MenuItem::linkToCrud('Marques de Voitures', 'fa fa-car', Brand::class),
+            MenuItem::linkToCrud('Marques de Voitures', 'fa fa-check', Brand::class),
+            MenuItem::linkToCrud('Images des Voitures', 'fa fa-photo', Thumbnail::class),
         ];
     }
 }

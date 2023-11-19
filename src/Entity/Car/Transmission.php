@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\Car;
 
-use App\Repository\FuelRepository;
+use App\Repository\Car\TransmissionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: FuelRepository::class)]
-class Fuel
+#[ORM\Entity(repositoryClass: TransmissionRepository::class)]
+class Transmission
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -18,7 +18,7 @@ class Fuel
     #[ORM\Column(length: 50)]
     private ?string $name = null;
 
-    #[ORM\OneToMany(mappedBy: 'fuel', targetEntity: Car::class)]
+    #[ORM\OneToMany(mappedBy: 'transmission', targetEntity: Car::class)]
     private Collection $cars;
 
     public function __construct()
@@ -55,7 +55,7 @@ class Fuel
     {
         if (!$this->cars->contains($car)) {
             $this->cars->add($car);
-            $car->setFuel($this);
+            $car->setTransmission($this);
         }
 
         return $this;
@@ -65,14 +65,14 @@ class Fuel
     {
         if ($this->cars->removeElement($car)) {
             // set the owning side to null (unless already changed)
-            if ($car->getFuel() === $this) {
-                $car->setFuel(null);
+            if ($car->getTransmission() === $this) {
+                $car->setTransmission(null);
             }
         }
 
         return $this;
     }
-    
+
     public function __toString()
 {
     return $this->getName(); // Replace with the actual property you want to display

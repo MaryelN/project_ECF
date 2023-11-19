@@ -2,7 +2,7 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Transmission;
+use App\Entity\Car\Transmission;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 

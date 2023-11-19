@@ -2,9 +2,8 @@
 
 namespace App\Controller;
 
-use App\Entity\Car;
+use App\Entity\Car\Car;
 use App\Form\CarType;
-use App\Repository\CarRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;

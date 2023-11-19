@@ -2,7 +2,7 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Brand;
+use App\Entity\Car\Brand;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 

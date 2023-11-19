@@ -1,29 +1,46 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\Car;
 
-use App\Repository\CarRepository;
+use App\Entity\Images;
+use Cocur\Slugify\Slugify;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Trait\CreatedAtTrait;
+use App\Repository\Car\CarRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use symfony\component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CarRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Car
 {
+    use CreatedAtTrait;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\NotBlank()]
     private ?string $name = null;
 
+    #[ORM\Column(type: 'string', length:255, nullable: true)]
+    #[Assert\NotBlank()]
+    private ?string $slug = null;
+
     #[ORM\Column(type: Types::SMALLINT)]
+    #[Assert\NotBlank()]
     private ?int $car_year = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: Types::INTEGER)]
+    #[Assert\NotBlank()]
     private ?int $km = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
+    #[Assert\NotBlank()]
     private ?string $price = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -31,16 +48,44 @@ class Car
 
     #[ORM\ManyToOne(inversedBy: 'cars')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Assert\NotBlank()]
     private ?Transmission $transmission = null;
 
     #[ORM\ManyToOne(inversedBy: 'cars')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Assert\NotBlank()]
     private ?Fuel $fuel = null;
 
     #[ORM\ManyToOne(inversedBy: 'cars')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Assert\NotBlank()]
     private ?Brand $brand = null;
 
+    #[ORM\OneToMany(mappedBy: 'car', targetEntity: Thumbnail::class, cascade: ['persist', 'remove'])]
+    private Collection $thumbnails;
+    
+    #[ORM\Column(type: 'datetime_immutable')]
+    private ?\DateTimeImmutable $updatedAt = null;
+    
+    public function __construct()
+    {
+        $this->created_at = new \DateTimeImmutable();
+        $this->updatedAt = new \DateTimeImmutable();
+        $this->thumbnails = new ArrayCollection();
+    }
+
+    #[ORM\PrePersist]
+    public function prePersist()
+    {
+        $this->slug = (new Slugify())->slugify($this->name);
+    }
+    
+    #[ORM\PreUpdate]
+    public function preUpdate()
+    {
+        $this->updatedAt = new \DateTimeImmutable();
+    }
+    
     public function getId(): ?int
     {
         return $this->id;
@@ -54,6 +99,18 @@ class Car
     public function setName(string $name): static
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): static
+    {
+        $this->slug = $slug;
 
         return $this;
     }
@@ -139,6 +196,33 @@ class Car
     {
         $this->brand = $brand;
 
+        return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->name;
+    }
+
+    public function addThumbnail(Thumbnail $thumbnail): static
+    {
+        if (!$this->thumbnails->contains($thumbnail)) {
+            $this->thumbnails->add($thumbnail);
+            $thumbnail->setCar($this);
+        }
+    
+        return $this;
+    }
+    
+    public function removeThumbnail(Thumbnail $thumbnail): static
+    {
+        if ($this->thumbnails->removeElement($thumbnail)) {
+            // set the owning side to null (unless already changed)
+            if ($thumbnail->getCar() === $this) {
+                $thumbnail->setCar(null);
+            }
+        }
+    
         return $this;
     }
 }

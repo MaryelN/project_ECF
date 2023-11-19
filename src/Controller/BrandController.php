@@ -2,9 +2,8 @@
 
 namespace App\Controller;
 
-use App\Entity\Brand;
-use App\Form\BrandType;
-use App\Repository\BrandRepository;
+use App\Entity\Car\Brand;
+use App\Repository\Car\BrandRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
