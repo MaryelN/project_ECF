@@ -1,5 +1,12 @@
 {% extends '@EasyAdmin/page/content.html.twig' %}
 
 {% block content %}
-<h1>Bienvenue au Garage V. Parrot administration</h1>
+    {% if app.user and app.user.isVerified == false %}
+    <div class="alert alert-warning alert-dismissible" role="alert">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <div class="alert-message">
+            <strong>Votre compte n'est pas activé</strong>renvoyer le lien d'activation <a href="{{ path('app_resend') }}">clickez ici</a>
+        </div>
+    </div>
+    {% endif %}
 {% endblock %}

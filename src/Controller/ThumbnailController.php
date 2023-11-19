@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Form\ThumbnailType;
 use App\Entity\Car\Thumbnail;
-use App\Entity\Car\Car;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
