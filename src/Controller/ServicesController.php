@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Repository\ScheduleRepository;
 use App\Repository\ServiceRepository;
+use App\Service\ScheduleFormatterService;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,6 +13,13 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ServicesController extends AbstractController
 {
+    private $scheduleFormatterService;
+
+    public function __construct(ScheduleFormatterService $scheduleFormatterService)
+    {
+        $this->scheduleFormatterService = $scheduleFormatterService;
+    }
+
     #[Route('/services', name: 'app_services')]
     public function index(
         ServiceRepository $serviceRepository, 
@@ -20,8 +28,10 @@ class ServicesController extends AbstractController
         Request $request
         ): Response
     {
-        $schedules = $schedulerepository->findBy([], ['id' => 'ASC']);
+        $formattedSchedules = $this->scheduleFormatterService->getFormattedSchedules();
+        
         $data = $serviceRepository->findBy([], ['id' => 'ASC']);
+        
         $services = $paginator->paginate(
             $data,
             $request->query->getInt('page', 1),
@@ -29,9 +39,9 @@ class ServicesController extends AbstractController
         );
 
         return $this->render('pages/services/index.html.twig', [
+            'formattedSchedules' => $formattedSchedules,
             'controller_name' => 'ServicesController',
             'services'=>$services,
-            'schedules'=>$schedules,
             'title'=>'Services'
         ]);
     }

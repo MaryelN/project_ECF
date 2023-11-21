@@ -7,6 +7,7 @@ use App\Form\RegistrationFormType;
 use App\Repository\UserRepository;
 use App\Security\UserAuthenticator;
 use App\Service\JWTService;
+use App\Service\ScheduleFormatterService;
 use App\Service\SendMailService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,9 +19,26 @@ use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 
 class RegistrationController extends AbstractController
 {
-    #[Route('/inscription', name: 'app_register')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, UserAuthenticator $authenticator, EntityManagerInterface $entityManager, SendMailService $mailer, JWTService $jwt): Response
+    private $scheduleFormatterService;
+
+    public function __construct(ScheduleFormatterService $scheduleFormatterService)
     {
+        $this->scheduleFormatterService = $scheduleFormatterService;
+    }
+
+    #[Route('/inscription', name: 'app_register')]
+    public function register(
+        Request $request, 
+        UserPasswordHasherInterface $userPasswordHasher, 
+        UserAuthenticatorInterface $userAuthenticator, 
+        UserAuthenticator $authenticator, 
+        EntityManagerInterface $entityManager, 
+        SendMailService $mailer, 
+        JWTService $jwt
+        ): Response
+    {
+        $formattedSchedules = $this->scheduleFormatterService->getFormattedSchedules();
+
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
@@ -66,6 +84,8 @@ class RegistrationController extends AbstractController
 
         return $this->render('pages/registration/register.html.twig', [
             'registrationForm' => $form->createView(),
+            'formattedSchedules' => $formattedSchedules,
+
         ]);
     }
 

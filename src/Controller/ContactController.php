@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Contact;
 use App\Form\ContactType;
+use App\Service\ScheduleFormatterService;
 use App\Service\SendMailService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -12,9 +13,18 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 class ContactController extends AbstractController
 {
+    private $scheduleFormatterService;
+
+    public function __construct(ScheduleFormatterService $scheduleFormatterService)
+    {
+        $this->scheduleFormatterService = $scheduleFormatterService;
+    }
+
     #[Route('/contact', name: 'app_contact')]
     public function sendMessage(Request $request, EntityManagerInterface $manager, SendMailService $mailer): Response
     {
+        $formattedSchedules = $this->scheduleFormatterService->getFormattedSchedules();
+
         $contact = new Contact();
 
         $form = $this->createForm(ContactType::class, $contact);
@@ -39,6 +49,7 @@ class ContactController extends AbstractController
         }
         
         return $this->render('pages/contact/index.html.twig', [
+            'formattedSchedules' => $formattedSchedules,
             'form' => $form->createView(),
             'title' => 'Contact',
         ]);

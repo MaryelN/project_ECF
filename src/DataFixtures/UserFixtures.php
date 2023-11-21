@@ -36,7 +36,6 @@ class UserFixtures extends Fixture
         for($usr = 1; $usr <=5; $usr++){
             $user = new User();
             $user->setEmail($faker->email);
-            $user->setRoles(['ROLE_user']);
             $user->setPassword(
                 $this->passwordEncoder->hashPassword($user, 'secret'));
             $user->setLastname($faker->lastname);
