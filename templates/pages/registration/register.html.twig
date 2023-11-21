@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+
+<section class="vh-200">
+    
+        <div class="container h-100 my-5">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                    <div class="card" style="border-radius: 15px;">
+                        <div class="card-body p-5">
+                            <h2 class="text-uppercase text-center mb-5">Inscription</h2>
+                            <form method="POST" action=" {{ path('app_register') }} ">
+                                {{ form_errors(registrationForm) }}
+                                {{ form_start(registrationForm) }}
+                                <fieldset class="my-3">
+                                    <legend>Coordonées</legend>
+                                    <div class="form-outline mb-4">
+                                        {{ form_row(registrationForm.lastname) }}
+                                    </div>  
+                                    <div class="form-outline mb-4">
+                                        {{ form_row(registrationForm.name) }}
+                                    </div>
+                                    <div class="form-outline mb-4">
+                                        {{ form_row(registrationForm.address) }}
+                                    </div>
+                                </fieldset>
+                                <fieldset class="my-3">
+                                    <legend>Identifiants</legend>
+                                    <div class="form-outline mb-4">
+                                        {{ form_row(registrationForm.email) }}
+                                    </div>  
+                                    <div class="form-outline mb-4">
+                                        {{ form_row(registrationForm.plainPassword, {
+                                            label: 'Mot de Passe'
+                                        }) }}
+                                    </div>
+                                </fieldset>
+                                <div class="form-check d-flex-column justify-content-center mb-5">
+                                {{ form_row(registrationForm.RGPDConsent) }}
+                                <div class="d-flex justify-content-center mt-3">
+                                    <button type="submit" class="btn btn-primary btn-lg my-3">Registrer</button>
+                                    {{ form_end(registrationForm) }}
+                                </div>
+                                <div>
+                                    <p class="text-center text-muted mt-5 mb-0">Vous avez déjà un compte ? <a href="{{path('app_login')}}" class="fw-bold text-body"><u>Se connecter ici</u></a></p>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+</section>
+{% endblock %}
