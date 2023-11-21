@@ -12,16 +12,17 @@ use App\Entity\User;
 use App\Entity\Comment;;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted as AttributeIsGranted;
 
 class DashboardController extends AbstractDashboardController
 {
+    
     #[Route('/admin', name: 'admin')]
-    #[IsGranted('ROLE_ADMIN', message: 'Vous n\'avez pas accès à cette page')]
-    #[IsGranted('ROLE_USER', message: 'Vous n\'avez pas accès à cette page')]
+    #[AttributeIsGranted('ROLE_USER', message: 'Vous n\'avez pas accès à cette page')]
 
     public function index(): Response
     {
@@ -38,14 +39,11 @@ class DashboardController extends AbstractDashboardController
             ->setTitle('Garage V. Parrot - Admin')
             ->renderContentMaximized();
     }
-
-    
     public function configureMenuItems(): iterable
     {
         $menuItems = [
             MenuItem::linkToDashboard('Accueil', 'fa fa-home'),
         ];
-    
         if ($this->isGranted('ROLE_ADMIN')) {
             $menuItems[] = MenuItem::section('Utilisateurs');
             $menuItems[] = MenuItem::linkToCrud('Utilisateurs', 'fa fa-user', User::class);
@@ -59,8 +57,10 @@ class DashboardController extends AbstractDashboardController
         $menuItems[] = MenuItem::linkToCrud('Commentaires', 'fa fa-comment', Comment::class);
         $menuItems[] = MenuItem::linkToCrud('Services', 'fa fa-wrench', Service::class);
     
-        $menuItems[] = MenuItem::section('Voitures d\'Occasion');
+        $menuItems[] = MenuItem::section('Voitures d\'Occasion') ;
         $menuItems[] = MenuItem::linkToCrud('Annonces de Voitures', 'fa fa-car', Car::class);
+        $menuItems[] = MenuItem::linkToCrud('Marques de Voitures', 'fa fa-car', Brand::class);
+        $menuItems[] = MenuItem::linkToCrud('Images de Voitures', 'fa fa-car', Thumbnail::class);
     
         return $menuItems;
     }

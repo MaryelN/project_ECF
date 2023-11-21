@@ -10,9 +10,11 @@
         "doctrine/doctrine-bundle": "^2.10",
         "doctrine/doctrine-fixtures-bundle": "^3.5",
         "doctrine/doctrine-migrations-bundle": "^3.2",
+        "easycorp/easyadmin-bundle": "^4.8",
+        "knplabs/knp-paginator-bundle": "^6.3",
         "symfony/asset": "^6.0",
         "symfony/console": "^6.0",
-        "symfony/dotenv": "^6.0",
+        "symfony/dotenv": "6.3.*",
         "symfony/flex": "^2.0",
         "symfony/form": "^6.0",
         "symfony/framework-bundle": "^6.0",
@@ -60,8 +62,7 @@
     "scripts": {
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
-            "assets:install %PUBLIC_DIR%": "symfony-cmd",
-            "production": "production"
+            "assets:install %PUBLIC_DIR%": "symfony-cmd"
         },
         "post-install-cmd": [
             "@auto-scripts"

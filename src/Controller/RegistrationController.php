@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 
 class RegistrationController extends AbstractController
@@ -27,6 +28,7 @@ class RegistrationController extends AbstractController
     }
 
     #[Route('/inscription', name: 'app_register')]
+    #[IsGranted('ROLE_ADMIN', message: 'Vous êtes déjà inscrit')]
     public function register(
         Request $request, 
         UserPasswordHasherInterface $userPasswordHasher, 
@@ -108,6 +110,7 @@ class RegistrationController extends AbstractController
     }
 
     #[Route('/renvoiverif', name: 'app_resend')]
+    #[IsGranted('ROLE_USER', message: 'Vous devez être connecté pour accéder à cette page')]
     public function resendVerif(JWTService $jwt, SendMailService $mailer, UserRepository $userRepository): Response
     {
         $user = $this->getUser();
