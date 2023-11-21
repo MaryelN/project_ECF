@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Repository\ScheduleRepository;
+use App\Service\ScheduleFormatterService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -9,9 +11,23 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
 {
-    #[Route(path: '/connexion', name: 'app_login')]
-    public function login(AuthenticationUtils $authenticationUtils): Response
+    private $scheduleFormatterService;
+
+    public function __construct(ScheduleFormatterService $scheduleFormatterService)
     {
+        $this->scheduleFormatterService = $scheduleFormatterService;
+    }
+
+    private function getFormattedSchedules(ScheduleRepository $repository): array
+    {
+        return $this->scheduleFormatterService->getFormattedSchedules($repository);
+    }
+
+    #[Route(path: '/connexion', name: 'app_login')]
+    public function login(AuthenticationUtils $authenticationUtils, ScheduleRepository $repository,): Response
+    {
+        $formattedSchedules = $this->getFormattedSchedules($repository);
+
         if ($this->getUser()) {
             return $this->redirectToRoute('admin');
         }
@@ -21,7 +37,8 @@ class SecurityController extends AbstractController
 
         return $this->render('pages/security/login.html.twig', [
             'last_username' => $lastUsername, 
-            'error' => $error
+            'error' => $error,
+            'formattedSchedules'=>$formattedSchedules
         ]);
     }
 

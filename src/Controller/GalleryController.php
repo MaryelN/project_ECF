@@ -6,6 +6,8 @@ use App\Entity\Car\Car;
 use App\Entity\Contact;
 use App\Form\ContactType;
 use App\Repository\Car\CarRepository;
+use App\Repository\ScheduleRepository;
+use App\Service\ScheduleFormatterService;
 use App\Service\SendMailService;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -17,14 +19,27 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/gallerie', name: 'app_gallery_')]
 class GalleryController extends AbstractController
 {
+    private $scheduleFormatterService;
+
+    public function __construct(ScheduleFormatterService $scheduleFormatterService)
+    {
+        $this->scheduleFormatterService = $scheduleFormatterService;
+    }
+
+    private function getFormattedSchedules(ScheduleRepository $repository): array
+    {
+        return $this->scheduleFormatterService->getFormattedSchedules($repository);
+    }
+
     #[Route('/', name:'index')]
     public function index(
         CarRepository $carRepository, 
         PaginatorInterface $paginator, 
+        ScheduleRepository $repository,
         Request $request): Response
     {        
-        
-        
+        $formattedSchedules = $this->getFormattedSchedules($repository);
+
         $cars = $paginator->paginate(
             $carRepository->findAll(),
             $request->query->getInt('page', 1),
@@ -34,13 +49,14 @@ class GalleryController extends AbstractController
         return $this->render('pages/gallery/index.html.twig', [
             'controller_name' => 'GalleryController',
             'title'=>'Gallerie',
-            'cars'=> $cars 
+            'cars'=> $cars,
+            'formattedSchedules'=>$formattedSchedules
         ]);
     }
     
     #[Route('/{id}', name:'details')]
-    public function details(Car $car): Response
-    {                                   
+    public function details(Car $car, ): Response
+    {                     
         return $this->render('pages/gallery/details.html.twig', [
             'controller_name' => 'GalleryController',
             'title'=>'Details',
@@ -49,7 +65,12 @@ class GalleryController extends AbstractController
     }
 
     #[Route('/{id}/contacter', name:'contact')]
-    public function sendMessage(Request $request, EntityManagerInterface $manager, SendMailService $mailer, Car $car): Response
+    public function sendMessage(
+        Request $request, 
+        EntityManagerInterface $manager, 
+        SendMailService $mailer, 
+        Car $car, 
+        ): Response
     {
         $contact = new Contact();
 
