@@ -7,11 +7,12 @@ Il s'agit d'un site Web pour le garage automobile V. Parrot, qui fournit à l'ad
 **Technologies utilisées:**
 - HTML
 - CSS
-- Bootstrap
+- Bootstrap 5.3.2
 - JavaScript
-- PHP
+- PHP 8.2.11
+- Symfony CLI version 5.5.10
 - MySQL
-- Symfony
+- MariaDB
 
 1. Page d'index :
    - **Catalogue de services:** Découvrez notre large gamme de services pour maintenir votre véhicule en parfait état.
