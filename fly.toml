@@ -1,9 +1,9 @@
-# fly.toml app configuration file generated for project-ecf-rough-snow-4065 on 2023-11-21T19:14:29+01:00
+# fly.toml app configuration file generated for project-ecf-frosty-waterfall-438 on 2023-11-21T21:04:38+01:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = "project-ecf-rough-snow-4065"
+app = "project-ecf-frosty-waterfall-438"
 primary_region = "cdg"
 console_command = "php /var/www/html/artisan tinker"
 
