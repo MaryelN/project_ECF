@@ -12,9 +12,9 @@ function generateStarRating(rating) {
   let stars = '';
   for (let i = 1; i <= 5; i++) {
       if (i <= rating) {
-          stars += '<img src="/public/assets/icons/star.svg" alt="Star" />';
+          stars += '<img src="build/images/icons/star.svg" alt="icon star">';
       } else {
-          stars += '<img src="/public/assets/icons/star-empty.svg" alt="Empty Star" />';
+          stars += '<img src="build/images/icons/star-empty.svg" alt="Empty Star">';
       }
   }
   return stars;

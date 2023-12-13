@@ -23,6 +23,18 @@
   }
 }
 
+.services {
+  h2 {
+    color: $secondary;
+  }
+
+  p {
+    color: $primary;
+  }
+
+  
+}
+
 .gallery {
   background-color: $primary;
 
@@ -33,6 +45,17 @@
   h5 {
     padding-left: 1rem;
     text-align: left;
+  }
+}
+
+.comments {
+  img {
+    width: 15px;
+    margin: 0 5px 5px 0;
+
+  }
+  .card-title {
+    color: $primary;
   }
 }
 .content {

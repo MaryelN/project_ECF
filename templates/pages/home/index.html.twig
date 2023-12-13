@@ -80,25 +80,26 @@
 
 
 <!--Services -->
-<section class="container m-2" id="services">
-    <div class="row text-center">
-        <a class="col" href="{{ path('app_services') }}"> <button class="btn btn-primary mt-5"> CONNAÎTRE TOUS NOS SERVICES</button></a>
-    </div> 
-</section>
-
-<section class="container pt-4 pt-xl-5 text-white">
-    <div class="row row-cols-1 row-cols-lg-2 py-5 text-center">
-        <div class="col mx-auto lead">
-            <h2 class="text">Les nombreux services de réparation automobile que nous vous offrons</h2>
-            <div>
-                <img src={{ asset('build/images/icons/calendar.svg') }} alt="icon calendrier">
-                <a href="{{ path('app_contact') }}" class="btn btn-primary mx-2 mt-3"> PRENDRE UN RENDEZ-VOUS</a>
+<section class="services">
+    <div class=" container m-2" id="services">
+        <div class="row text-center">
+            <a class="col" href="{{ path('app_services') }}"> <button class="btn btn-primary mt-5"> CONNAÎTRE TOUS NOS SERVICES</button></a>
+        </div> 
+    </div>
+    <div class="container pt-4 pt-xl-5">
+        <div class="row row-cols-1 row-cols-lg-2 py-5 align-items-center text-center">
+            <div class="col mx-auto lead">
+                <h2 class="text">Les nombreux services de réparation automobile que nous vous offrons</h2>
+                <div>
+                    <img src={{ asset('build/images/icons/calendar.svg') }} alt="icon calendrier">
+                    <a href="{{ path('app_contact') }}" class="btn btn-primary mx-2 mt-3"> PRENDRE UN RENDEZ-VOUS</a>
+                </div>
             </div>
-        </div>
-        <div class="col mx-auto mt-5">
-            <p>
-                Rencontrez l'équipe de mécaniciens qualifiés avec plus de 5 ans d'expérience immaculée dans l'industrie de la réparation automobile ! Nous n'utilisons que des pièces de première qualité et nous nous efforçons de rendre vos voyages sûrs et confortables ! Nous sommes toujours heureux de vous aider dans ces tâches.    
-            </p>
+            <div class="col mx-auto mt-5">
+                <p>
+                    Rencontrez l'équipe de mécaniciens qualifiés avec plus de 5 ans d'expérience immaculée dans l'industrie de la réparation automobile ! Nous n'utilisons que des pièces de première qualité et nous nous efforçons de rendre vos voyages sûrs et confortables ! Nous sommes toujours heureux de vous aider dans ces tâches.    
+                </p>
+            </div>
         </div>
     </div>
 </section>
@@ -143,7 +144,7 @@
         {% for comment in comments %}
         <div class="card col mx-3" style="width: 18rem;">
             <div class="card-body">
-                <h5 class="card-title">{{ comment.lastname }} {{ comment.name }}</h5>
+                <h6 class="comment-title">{{ comment.lastname }} {{ comment.name }}</h6>
                 <span class="comment-rating" data-rating="{{ comment.rating }}"></span>
                 <p class="card-text">{{ comment.message }}</p>
                 <p>{{ comment.createdAt|date('Y-m-d H:i:s') }}</p>
@@ -152,7 +153,7 @@
         {% endfor %}
     </div>
     <div class="text-center">
-        <a href="{{ path('app_comment') }}" class="btn btn-primary mt-5"> LAISSER UN COMMENTAIRE</a>
+        <a href="{{ path('app_comment') }}" class="btn btn-primary my-3"> LAISSER UN COMMENTAIRE</a>
     </div>
 </section>
 
