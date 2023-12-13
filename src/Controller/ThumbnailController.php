@@ -27,7 +27,7 @@ class ThumbnailController extends AbstractController
             $manager->persist($contact);
             $manager->flush();
 
-            $this->addFlash('success', 'Votre message a bien été envoyé !');
+            $this->addFlash('success', 'Votre image a bien été ajoutée');
             return $this->redirectToRoute('app_home');
         }
 
@@ -36,4 +36,5 @@ class ThumbnailController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
 }

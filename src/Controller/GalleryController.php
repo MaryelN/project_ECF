@@ -55,12 +55,15 @@ class GalleryController extends AbstractController
     }
     
     #[Route('/{id}', name:'details')]
-    public function details(Car $car, ): Response
-    {                     
+    public function details(Car $car, ScheduleRepository $repository): Response
+    {                
+        $formattedSchedules = $this->getFormattedSchedules($repository);
+
         return $this->render('pages/gallery/details.html.twig', [
             'controller_name' => 'GalleryController',
             'title'=>'Details',
-            'car'=>$car 
+            'car'=>$car,
+            'formattedSchedules'=>$formattedSchedules 
         ]);
     }
 
@@ -70,8 +73,10 @@ class GalleryController extends AbstractController
         EntityManagerInterface $manager, 
         SendMailService $mailer, 
         Car $car, 
+        ScheduleRepository $repository
         ): Response
     {
+        $formattedSchedules = $this->getFormattedSchedules($repository);
         $contact = new Contact();
 
         $form = $this->createForm(ContactType::class, $contact);
@@ -100,7 +105,8 @@ class GalleryController extends AbstractController
         return $this->render('pages/gallery/contact.html.twig', [
             'form' => $form->createView(),
             'title' => 'Contactez-nous',
-            'car' => $car
+            'car' => $car,
+            'formattedSchedules'=>$formattedSchedules
         ]);
     }
 }
