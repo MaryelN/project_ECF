@@ -1,13 +1,40 @@
 @use '../base/main' as *;
 
-h1 {
-  color: black;
-  font-family: 'Arsenal';
-  font-weight: 700;
-  font-style: italic, sans-serif;
+.hero {
+  .container {
+    background-image: url(../../../images/Hero.png); 
+    background-size: cover; 
+    background-position: center; 
+    height: 580px;
+
+    .row {
+      margin-top: 37px;
+      margin-left: -38px;
+      margin-right: 122px;
+
+      h1 {
+        color: $info;
+        text-align: left;
+        margin-right: 10px;
+        padding-left: 18px;
+        margin-left: 15px;
+      }
+    }
+  }
 }
 
+.gallery {
+  background-color: $primary;
 
+  h2 {
+    color: $info; 
+  }
+
+  h5 {
+    padding-left: 1rem;
+    text-align: left;
+  }
+}
 .content {
   position: relative;
   width: 100%;
@@ -19,7 +46,7 @@ h1 {
 }
 
 .content .content-overlay {
-  background: rgb(108, 156, 168);
+  background: $dark;
   position: absolute;
   height: 99%;
   width: 100%;
@@ -58,18 +85,11 @@ h1 {
   top: 50%;
   left: 50%;
   opacity: 1;
-}
-
-.content-details h3 {
-  color: #fff;
-  font-weight: 500;
-  letter-spacing: 0.15em;
-  margin-bottom: 0.5em;
-  text-transform: uppercase;
+  
 }
 
 .content-details p {
-  color: #fff;
+  color: $info;
   font-size: 0.8em;
 }
 

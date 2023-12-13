@@ -1,2 +1,25 @@
 @use '../base/main.scss' as *;
 
+h1 {
+  color: $dark;
+  font-family: 'Arsenal', sans-serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+h2 {
+  color: $primary;
+  font-family: 'Arsenal', sans-serif;
+  font-weight: 700;
+}
+
+h3{
+  color: $light;
+  font-family: 'Arsenal', sans-serif;
+  font-weight: 400;
+}
+
+.card-title{
+  @extend h3;
+  color: $info;
+}
