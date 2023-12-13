@@ -24,11 +24,11 @@
         <ul class="navbar-nav ms-auto">
             {% if app.user %}
                 <li class="d-flex">
-                    <a class="btn btn-success my-2 my-sm-0" href="{{path('app_logout')}}" type="submit">Deconnexion</a>
+                    <a class="btn btn-secondary my-2 my-sm-0" href="{{path('app_logout')}}" type="submit">Deconnexion</a>
                 </li>
             {% else %}
                 <li class="d-flex">
-                    <a class="btn btn-success my-2  mx-1 my-sm-0" href="{{path('app_login')}}" type="submit">Connexion</a>
+                    <a class="btn btn-secondary my-2  mx-1 my-sm-0" href="{{path('app_login')}}" type="submit">Connexion</a>
                 </li>
             {% endif %}
         </ul>

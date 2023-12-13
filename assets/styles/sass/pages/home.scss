@@ -1,3 +1,13 @@
+@use '../base/main' as *;
+
+h1 {
+  color: black;
+  font-family: 'Arsenal';
+  font-weight: 700;
+  font-style: italic, sans-serif;
+}
+
+
 .content {
   position: relative;
   width: 100%;
