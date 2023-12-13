@@ -9,17 +9,17 @@
         
         <div class="col">
           <div >
-            <img src="assets/icons/map.svg" alt="map icon">
+            <img src={{ asset('build/images/icons/map.svg') }} alt="map icon">
             <p class="mt-3">1 avenue Montaigne 75008 Paris</p>
           </div>
           <div >
-            <img src="assets/icons/tel.svg" alt="telephone icon">
+            <img src={{ asset('build/images/icons/tel.svg') }} alt="telephone icon">
             <p class="mt-3"> 04 70 29 53 14</p>
           </div>
         </div>
     
         <div class="col">
-          <img src="assets/icons/hour.svg" alt="hour icon">
+          <img src={{ asset('build/images/icons/hour.svg') }} alt="hour icon">
           <h5 class="mt-3">Horaires</h5>
           
           {% for formattedSchedule in formattedSchedules %}
@@ -52,13 +52,13 @@
       <div class="col d-flex-column">
         <ul class="nav mt-4 justify-content-center align-items-center mt-3">
           <li class="nav-item mx-2">
-            <a href="#" class="nav-link p-0 text-white"><img src="assets/icons/facebook.svg" alt="facebook"></a>
+            <a href="#" class="nav-link p-0 text-white"><img src={{ asset('build/images/icons/facebook.svg') }} alt="facebook"></a>
           </li>
           <li class="nav-item mx-2">
-            <a href="#" class="nav-link p-0 text-white"><img src="assets/icons/twitter.svg" alt="twitter"></a>
+            <a href="#" class="nav-link p-0 text-white"><img src={{ asset('build/images/icons/twitter.svg') }} alt="twitter"></a>
           </li>
           <li class="nav-item mx-2">
-            <a href="#" class="nav-link p-0 text-white"><img src="assets/icons/instagram.svg" alt="instagram"></a>
+            <a href="#" class="nav-link p-0 text-white"><img src={{ asset('build/images/icons/instagram.svg') }} alt="instagram"></a>
           </li>
           </div>
           <div  class="nav-item mt-5">
