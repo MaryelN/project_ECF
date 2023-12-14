@@ -13,5 +13,11 @@
 
 .btn-primary {
   @include btn;
-  background-color: $dark;
+  background-color: $primary;
+}
+
+.btn-white {
+  @include btn;
+  background-color: $white;
+  color: $primary;
 }

@@ -12,7 +12,6 @@
     <div class="text-center mt-3 py-3">
         <h1>Voitures d'Occasion </h1>
     </div>
-    <a href="{{ path('new') }}" class="btn btn-secondary">Ajouter une voiture</a>
     <div class="container d-flex">
         <div class="row">
             {% for car in cars %}
@@ -28,11 +27,7 @@
                             <li>{{ car.fuel.name }}</li>
                             <li>Transmission : {{ car.transmission.name }}</li>
                         </ul>
-                        <a href="{{ path('app_gallery_details',{id: car.id}) }}" class="btn btn-primary mx-auto">Plus d'information</a>
-                        <div class="mt-5">
-                            <a href="{{ path('edit', {'id': car.id}) }}" class="btn btn-secondary mx-auto ">Modifier</a>
-                            <a href="{{ path('delete', {'id': car.id}) }}" class="btn btn-warning mx-auto">Supprimer</a>
-                        </div>
+                        <a href="{{ path('app_gallery_details',{id: car.id}) }}" class="btn btn-primary mt-5 mx-auto">Plus d'information</a>
                     </div>
                 </div>
             </div>
