@@ -8,6 +8,11 @@
 // any CSS you import will output into a single css file (app.css in this case)
 import './styles/app.scss';
 
+
+
+
+
+
 function generateStarRating(rating) {
   let stars = '';
   for (let i = 1; i <= 5; i++) {
