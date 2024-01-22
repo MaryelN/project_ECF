@@ -29,7 +29,7 @@ class CarFixtures extends Fixture implements DependentFixtureInterface
         $car1 = new Car();
         $car1->setName('Mercedes-Benz CLA 220');
         $car1->setCarYear($yearValue);
-        $car1->setKm('48321');
+        $car1->setKm($kmValue);
         $car1->setPrice($priceValue);
         $description = "Détails du véhicule
             Catégorie Routière
@@ -52,9 +52,9 @@ class CarFixtures extends Fixture implements DependentFixtureInterface
         
         $car2 = new Car();
         $car2->setName('Renault Clio Sport');
-        $car2->setCarYear('2019');
-        $car2->setKm('20189');
-        $car2->setPrice('18980');
+        $car2->setCarYear($yearValue);
+        $car2->setKm($kmValue);
+        $car2->setPrice($priceValue);
         $description = "Détails du véhicule
             Catégorie Routière
             Année 2019
@@ -77,7 +77,7 @@ class CarFixtures extends Fixture implements DependentFixtureInterface
 
         $car3 = new Car();
         $car3->setName('Smart Brabus Convertible');
-        $car3->setCarYear('2017');
+        $car3->setCarYear($yearValue);
         $car3Km = '83250';
         $car3->setKm($car3Km);
         $car3->setPrice('11990');

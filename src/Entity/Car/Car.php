@@ -2,7 +2,6 @@
 
 namespace App\Entity\Car;
 
-use App\Entity\Images;
 use Cocur\Slugify\Slugify;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -223,6 +222,28 @@ class Car
             }
         }
     
+        return $this;
+    }
+
+    
+
+    /**
+     * Get the value of thumbnails
+     */ 
+    public function getThumbnails()
+    {
+        return $this->thumbnails;
+    }
+
+    /**
+     * Set the value of thumbnails
+     *
+     * @return  self
+     */ 
+    public function setThumbnails($thumbnails)
+    {
+        $this->thumbnails = $thumbnails;
+
         return $this;
     }
 }
