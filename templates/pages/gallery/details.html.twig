@@ -10,7 +10,6 @@
         <h1 class="text-center">Details de {{ car.name }}</h1>
     </div>
     <div class="card mx-5 px-3">
-        <img src="" class="card-img-top" alt="...">
         <div class="card-body">
             <p class="card-text text-body-primary">Prix : {{ car.price }}</p>
             <p class="card-text text-body-primary">Année : {{ car.carYear }}</p>
@@ -21,8 +20,7 @@
             <p>Description: {{ car.description | raw }}</p>
             <a href="{{ path('app_gallery_contact', {'id': car.id}) }}" class="btn btn-primary mx-auto">Contactez-nous</a>
             <div class="mt-5">
-                <a href="{{ path('edit', {'id': car.id}) }}" class="btn btn-secondary mx-auto ">Modifier</a>
-                <a href="{{ path('delete', {'id': car.id}) }}" class="btn btn-warning mx-auto">Supprimer</a>
+
             </div>
         </div>
     </div>

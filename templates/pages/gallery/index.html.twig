@@ -14,13 +14,18 @@
     </div>
     <div class="container d-flex">
         <div class="row">
+            
             {% for car in cars %}
             <div class="col px-3 py-3">
                 <div class="card" style="width: 18rem; height: 30rem;">
-                    <img src="..." class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">{{ car.name }}</h5>
                         <ul class="card-text">
+                            {% if car.thumbnails != null and car.thumbnails|length > 0 %}
+                                <li>{{ car.thumbnail.imageName }}</li>
+                                <img src="{{ vich_uploader_asset(car.thumbnails[0], 'imageFile') }}" alt="{{ car.name }}" />
+                            {% endif %}
+                            <li>Prix : {{ car.price }} €</li>
                             <li>Année :{{ car.carYear }}</li>
                             <li>{{ car.brand.name }}</li>
                             <li>{{ car.km }} km</li>
