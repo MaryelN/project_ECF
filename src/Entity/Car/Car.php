@@ -225,8 +225,6 @@ class Car
         return $this;
     }
 
-    
-
     /**
      * Get the value of thumbnails
      */ 
@@ -245,5 +243,21 @@ class Car
         $this->thumbnails = $thumbnails;
 
         return $this;
+    }
+
+    /**
+     * Get an array of image files from thumbnails
+     *
+     * @return array
+     */
+    public function getThumbnailImageFiles(): array
+    {
+        $thumbnailImageFiles = [];
+
+        foreach ($this->thumbnails as $thumbnail) {
+            $thumbnailImageFiles[] = $thumbnail->getImageFile();
+        }
+
+        return $thumbnailImageFiles;
     }
 }

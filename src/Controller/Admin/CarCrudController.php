@@ -29,33 +29,36 @@ class CarCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
-        return [
-            IdField::new('id')
-                ->hideOnForm()
-                ->hideOnIndex(),
-            TextField::new('name')
-                ->setLabel('Nom'),
-            IntegerField::new('car_year')
-                ->setLabel('Année'),
-            IntegerField::new('km')
-                ->setLabel('Kilométrage'),
-            IntegerField::new('price')
-                ->setLabel('Prix'),
-            AssociationField::new('transmission')
-                ->setLabel('Transmission')
-                ->setCrudController(TransmissionCrudController::class)
-                ->setHelp('Choisissez la transmission de la voiture'),
-            AssociationField::new('fuel')
-                ->setLabel('Carburant')
-                ->setCrudController(FieldCrudController::class)
-                ->setHelp('Choisissez le carburant de la voiture'),
-            AssociationField::new('brand')
-                ->setLabel('Marque')
-                ->setHelp('Choisissez la marque de la voiture')
-                ->setCrudController(BrandCrudController::class),
-        
-            TextEditorField::new('description')
-                ->setLabel('Description'),
-        ];
-    }   
+        yield IdField::new('id')
+            ->hideOnForm()
+            ->hideOnIndex();
+
+        yield TextField::new('name')
+            ->setLabel('Nom');
+
+        yield IntegerField::new('car_year')
+            ->setLabel('Année');
+
+        yield IntegerField::new('km')
+            ->setLabel('Kilométrage');
+
+        yield IntegerField::new('price')
+            ->setLabel('Prix');
+
+        yield AssociationField::new('transmission')
+            ->setLabel('Transmission')
+            ->setHelp('Choisissez la transmission de la voiture');
+
+        yield AssociationField::new('fuel')
+            ->setLabel('Carburant')
+            ->setHelp('Choisissez le carburant de la voiture');
+
+        yield AssociationField::new('brand')
+            ->setLabel('Marque')
+            ->setHelp('Choisissez la marque de la voiture');
+
+        yield TextEditorField::new('description')
+            ->setLabel('Description');
+
+    }
 }
