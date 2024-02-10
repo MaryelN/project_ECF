@@ -1,0 +1,18 @@
+@use '../base/main' as *;
+
+.gallery-cars {
+  h1 {
+    color: $secondary;
+  }
+
+  h2 {
+    color: $dark;
+  }
+
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: baseline;
+  }
+}

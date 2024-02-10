@@ -8,7 +8,7 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
-<section>
+<section class="gallery-cars">
     <div class="text-center mt-3 py-3">
         <h1>Voitures d'Occasion </h1>
     </div>
@@ -19,12 +19,11 @@
             <div class="col px-3 py-3">
                 <div class="card" style="width: 18rem; height: 30rem;">
                     <div class="card-body">
-                        <h5 class="card-title">{{ car.name }}</h5>
-                        <ul class="card-text">
-                            {% if car.thumbnails != null and car.thumbnails|length > 0 %}
-                                <li>{{ car.thumbnail.imageName }}</li>
-                                <img src="{{ vich_uploader_asset(car.thumbnails[0], 'imageFile') }}" alt="{{ car.name }}" />
+                        <h5>{{ car.name }}</h5>
+                        {% if car.thumbnails != null and car.thumbnails|length > 0 %}
+                            <img src="{{ vich_uploader_asset(car.thumbnails[0], 'imageFile') }}" alt="{{ car.name }}" height="150" />
                             {% endif %}
+                            <ul class="card-text mt-2">
                             <li>Prix : {{ car.price }} €</li>
                             <li>Année :{{ car.carYear }}</li>
                             <li>{{ car.brand.name }}</li>
@@ -32,7 +31,7 @@
                             <li>{{ car.fuel.name }}</li>
                             <li>Transmission : {{ car.transmission.name }}</li>
                         </ul>
-                        <a href="{{ path('app_gallery_details',{id: car.id}) }}" class="btn btn-primary mt-5 mx-auto">Plus d'information</a>
+                        <a href="{{ path('app_gallery_details',{id: car.id}) }}" class="btn btn-primary mt-3 mx-auto">Plus d'information</a>
                     </div>
                 </div>
             </div>
