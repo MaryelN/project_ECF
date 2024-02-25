@@ -24,6 +24,9 @@
         <ul class="navbar-nav ms-auto">
             {% if app.user %}
                 <li class="d-flex">
+                    <a class="btn btn-secondary my-2 my-sm-0" href="{{path('admin')}}">Tableau de bord</a>
+                </li>
+                <li class="d-flex mx-2">
                     <a class="btn btn-secondary my-2 my-sm-0" href="{{path('app_logout')}}" type="submit">Deconnexion</a>
                 </li>
             {% else %}
