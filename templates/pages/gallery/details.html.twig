@@ -6,11 +6,14 @@
 
 <div class="container">
     <a href="{{ path('app_gallery_index') }}" class="btn btn-primary mx-auto">Retour</a>
-    <div class="my-5">
-        <h1 class="text-center">Details de {{ car.name }}</h1>
-    </div>
-    <div class="card mx-5 px-3">
-        <div class="card-body">
+    <div class="card details-card my-3 mx-5 px-3">
+        <div class="card-title">
+            <h1 class="text-center">Details de {{ car.name }}</h1>
+        </div>
+        <div class="card-body details">
+            {% if car.thumbnails != null and car.thumbnails|length > 0 %}
+                <img src="{{ vich_uploader_asset(car.thumbnails[0], 'imageFile') }}" alt="{{ car.name }}" height="200" />
+                {% endif %}
             <p class="card-text text-body-primary">Prix : {{ car.price }}</p>
             <p class="card-text text-body-primary">Année : {{ car.carYear }}</p>
             <p class="card-text text-body-primary">{{ car.brand.name }}</p>
