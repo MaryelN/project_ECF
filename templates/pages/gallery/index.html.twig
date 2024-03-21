@@ -12,34 +12,64 @@
     <div class="text-center mt-3 py-3">
         <h1>Voitures d'Occasion </h1>
     </div>
-    <div class="container d-flex">
-        <div class="row">
-            
-            {% for car in cars %}
-            <div class="col px-3 py-3">
-                <div class="card" style="width: 18rem; height: 30rem;">
-                    <div class="card-body">
-                        <h5>{{ car.name }}</h5>
-                        {% if car.thumbnails != null and car.thumbnails|length > 0 %}
-                            <img src="{{ vich_uploader_asset(car.thumbnails[0], 'imageFile') }}" alt="{{ car.name }}" height="150" />
-                            {% endif %}
-                            <ul class="card-text mt-2">
-                            <li>Prix : {{ car.price }} €</li>
-                            <li>Année :{{ car.carYear }}</li>
-                            <li>{{ car.brand.name }}</li>
-                            <li>{{ car.km }} km</li>
-                            <li>{{ car.fuel.name }}</li>
-                            <li>Transmission : {{ car.transmission.name }}</li>
-                        </ul>
-                        <a href="{{ path('app_gallery_details',{id: car.id}) }}" class="btn btn-primary mt-3 mx-auto">Plus d'information</a>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
+    <div class="container">
+        <div class="col">
+            <p>Filtrer</p>
+            <form id="filters" action="">
+                {% for brand in brands %}
+                    <p><input type="checkbox" name="{{ brand.name }}" id="b{{ brand.id }}" value="{{ brand.id }}">
+                <label for="b{{ brand.id }}">{{brand.name}}</label></p>
+                {% endfor %}
+                <input type="hidden" name="page" id="" value="">
+            </form>
         </div>
-        <div class="pagination">
-            {{ knp_pagination_render(cars) }}
+        {# <select id="brand-filter" class="form-select" aria-label="Default select example">
+            <option selected>Marque de voiture</option>
+            {% for brand in brands %}
+                <option value="{{ brand }}">{{ brand.name }}</option>
+                {% endfor %}
+            </select>
         </div>
-    </div>
-</section>
+    </section> #}
+    
+    <section>
+        {% include "pages/gallery/_cars-content.html.twig" %}
+    </section>
+    
+    {% endblock %}
+{% block javascripts%}
+    {{ encore_entry_script_tags('app') }}
+    <script>
+        window.onload = () => {
+            const FiltersForm = document.querySelector('#filters');
+        
+            document.querySelectorAll('#filters input').forEach(input => {
+                input.addEventListener('change', () =>{
+                    //interception de click sur les checkbox
+                    //on recupere les valeurs des checkbox
+                    const Form = new FormData(FiltersForm);
+                    
+                    //On fabrique la "queryString"
+                    const Params = new URLSearchParams();
+
+                    Form.forEach((value, key) => {
+                        Params.append(key, value);
+                    });
+
+                    //On recupere l'url actuelle
+                    const Url = new URL(window.location.href);
+
+                    //On lance la requête AJAX
+                    fetch(Url.pathname + "?" + Params.toString() + "&ajax=1", {
+                        //On define la methode
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest'
+                        }
+                    }).then(response => {
+                        console.log(response)
+                    }).catch(error => alert(error));
+                });
+            });
+        }
+    </script>
 {% endblock %}

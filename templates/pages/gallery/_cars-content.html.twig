@@ -1,0 +1,33 @@
+<div class="container">
+    <div class="row row-cols-lg-3">
+        {% for car in cars %}
+        <div class="col px-3 py-3 d-flex justify-content-center">
+            <div class="card" style="width: 18rem; height: 30rem;">
+                <div class="card-body">
+                    <h5>{{ car.name }}</h5>
+
+                    {% if car.thumbnails != null and car.thumbnails|length > 0 %}
+                    <img src="{{ vich_uploader_asset(car.thumbnails[0], 'imageFile') }}" alt="{{ car.name }}" height="150" />
+                    {% endif %}
+                    
+                    <ul class="card-text mt-2">
+                        <li>Prix : {{ car.price }} €</li>
+                        <li>Année :{{ car.carYear }}</li>
+                        <li>{{ car.brand.name }}</li>
+                        <li>{{ car.km }} km</li>
+                        <li>{{ car.fuel.name }}</li>
+                        <li>Transmission : {{ car.transmission.name }}</li>
+                    </ul>
+                    <a href="{{ path('app_gallery_details',{id: car.id}) }}" class="btn btn-primary mt-3 mx-auto">Plus d'information</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="d-flex justify-content-center">
+    {{ knp_pagination_render(cars) }}
+</div>
+
+

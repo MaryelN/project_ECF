@@ -8,7 +8,12 @@
     <div class="row d-flex justify-content-center align-items-center h-90 mt-5">
         <div class="col-12 col-md-9 col-lg-7 col-xl-6">
             <div class="card" style="border-radius: 15px;">
-                <div class="card-body p-5">
+                <div class="card-body p-5 mb-5">
+                    <div class="d-flex justify-content-center">
+                        {% if car.thumbnails != null and car.thumbnails|length > 0 %}
+                            <img src="{{ vich_uploader_asset(car.thumbnails[0], 'imageFile') }}" alt="{{ car.name }}" height="200" />
+                            {% endif %}
+                        </div>
                     <h2 class="text-uppercase text-center mb-5">Contactez-nous</h2>
                     {{ form(form, {'method': 'POST'}) }}
                 </div>
