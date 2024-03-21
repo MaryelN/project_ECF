@@ -22,8 +22,7 @@ class HomeController extends AbstractController
     #[Route('/accueil', name: 'app_home')]
     public function index(CommentRepository $commentRepository): Response
     {
-        
-        $comments = $commentRepository->findBy(['rating'=> 5],[ 'id' => 'DESC'], 3);
+        $comments = $commentRepository->findLatestVerifiedComments();
 
         $formattedSchedules = $this->scheduleFormatterService->getFormattedSchedules();
 
