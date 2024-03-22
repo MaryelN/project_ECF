@@ -36,6 +36,11 @@ class CarCrudController extends AbstractCrudController
         yield TextField::new('name')
             ->setLabel('Nom');
 
+        yield IntegerField::new('slug')
+            ->setLabel('Slug')
+            ->hideOnForm()
+            ->hideOnIndex();
+
         yield IntegerField::new('car_year')
             ->setLabel('Année');
 
