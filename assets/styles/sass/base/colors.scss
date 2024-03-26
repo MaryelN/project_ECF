@@ -1,0 +1,14 @@
+$orange-web: rgba(255, 174, 0, 1);
+$oxford-blue: rgba(3, 8, 38, 1);
+$delft-blue: rgba(25, 44, 97, 1);
+$ruddy-blue: rgba(127, 168, 215, 1);
+$white: rgba(255, 255, 255, 1);
+
+
+$primary: $delft-blue;
+$secondary: $orange-web;
+$dark: $oxford-blue;
+$light: $ruddy-blue;
+$info: $white;
+
+@import "~bootstrap/scss/bootstrap";

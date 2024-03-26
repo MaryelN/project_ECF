@@ -1,0 +1,35 @@
+@font-face {
+  font-family: "Arsenal";
+  font-weight: 400;
+  src: url('../../../fonts/arsenal.woff2') format('woff2'), url('../../../fonts/arsenal.woff') format('woff');
+}
+
+@font-face {
+  font-family: "Arsenal";
+  font-weight: 700;
+  src: url('../../../fonts/arsenal-bold.woff') format('woff2'), url('../../../fonts/arsenal-bold.woff2') format('woff');
+}
+
+@font-face {
+  font-family: "Arsenal";
+  font-weight: 700;
+  font-style: italic;
+  src: url('../../../fonts/arsenal-bolditalic.woff2') format('woff2'), url('../../../fonts/arsenal-bolditalic.woff') format('woff');
+}
+
+@font-face {
+  font-family: "lalezar";
+  font-weight: 400;
+  src: url('../../../fonts/lalezar.woff2') format('woff2'), url('../../../fonts/lalezar.woff') format('woff');
+}
+
+@font-face {
+  font-family: "opensans";
+  src: url('../../../fonts/opensans.woff2') format('woff2'), url('../../../fonts/opensans.woff') format('woff');
+}
+
+@font-face {
+  font-family: "opensans";
+  font-style: italic;
+  src: url('../../../fonts/opensans-italic.woff2') format('woff2'), url('../../../fonts/opensans-italic.woff') format('woff');
+}

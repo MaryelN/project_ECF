@@ -21,4 +21,55 @@ class CarRepository extends ServiceEntityRepository
         parent::__construct($registry, Car::class);
     }
 
+    public function paginationQuery($page, $limit, $filters = null)
+    {
+        $query = $this->createQueryBuilder('c');
+
+        // //on filtre les données
+        
+        if($filters != null){
+            $query->andWhere('c.brand IN (:brands)')
+                ->setParameter(':brands', array_values($filters));
+        }
+
+        $query->orderBy('c.created_at')
+        ->setFirstResult(($page * $limit) - $limit)
+        ->setMaxResults($limit)
+        ;
+        return $query->getQuery()->getResult();
+    }
+
+    public function getTotalCars($filters = null )
+    {
+        $query = $this->createQueryBuilder('c')
+            ->select('count(c)');
+
+        if($filters != null){
+            $query->andWhere('c.brand IN (:brands)')
+                ->setParameter(':brands', array_values($filters));
+        }
+        
+        $query->orderBy('c.created_at');
+
+        return $query->getQuery()->getResult();
+    }
+
+    public function findCarsByBrand(string $brand): array
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.brand = :brand')
+            ->setParameter('brand', $brand)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findCarsByModel(string $model): array
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.model = :model')
+            ->setParameter('model', $model)
+            ->getQuery()
+            ->getResult();
+    }
+
 }

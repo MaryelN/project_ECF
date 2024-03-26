@@ -1,0 +1,45 @@
+@use '../base/main' as *;
+
+.gallery-cars {
+  h1 {
+    color: $secondary;
+  }
+
+  h2 {
+    color: $dark;
+  }
+
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: baseline;
+  }
+}
+
+.details-card{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: baseline;
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid $dark;
+  border-radius: 10px;
+  box-shadow: 0 0 10px 0 $dark;
+  background-color: $info;
+  color: $dark;
+  h2 {
+    color: $secondary;
+  }
+  img {
+    width: 250px;
+    height: auto;
+  }
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: baseline;
+  }
+}

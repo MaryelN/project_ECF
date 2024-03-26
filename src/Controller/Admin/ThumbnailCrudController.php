@@ -10,6 +10,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 
@@ -23,14 +24,17 @@ class ThumbnailCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setEntityLabelInPlural('Images')
-            ->setEntityLabelInSingular('Image')
+            ->setEntityLabelInPlural('Thumbnails')
+            ->setEntityLabelInSingular('Thumbnail')
             ->setPageTitle(Crud::PAGE_INDEX, 'Liste des %entity_label_plural%')
             ->setPaginatorPageSize(10);
     }
 
     public function configureFields(string $pageName): iterable
     {
+        $mappingParams = $this->getParameter('vich_uploader.mappings'); 
+
+        $carsImagePath = $mappingParams['thumbnail']['uri_prefix'];
         return [
             IdField::new('id')
                 ->hideOnForm()
@@ -41,10 +45,11 @@ class ThumbnailCrudController extends AbstractCrudController
                 ->setLabel('Nom de la voiture')
                 ->setCrudController(CarCrudController::class)
                 ->setHelp('Choisissez la voiture'),
+            TextareaField::new('imageFile')
+                ->setFormType(VichImageType::class),
             ImageField::new('imageName')
-                ->setFormType(VichImageType::class)
-                ->setLabel('Image'),
-                // ->setUploadDir('public/uploads/images/cars'),
+                ->setBasePath($carsImagePath)
+                ->hideOnForm(),
             IntegerField::new('imageSize')
                 ->hideOnForm()
                 ->hideOnIndex()

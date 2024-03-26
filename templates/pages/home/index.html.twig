@@ -5,124 +5,136 @@
 {% block body %}
 
 
-<!--Hero-->
-
 <section class="hero">
-    <div class="container pt-4 pt-xl-5" style="background-image: url('assets/images/Hero.png'); background-size: cover; background-position: center; height: 580px;">
-        <div class="row g-0 pt-5" style="margin-bottom: 0px;padding-bottom: 0px;padding-top: 24px;margin-top: 37px;margin-left: -38px;padding-left: 0px;padding-right: 0px;margin-right: 122px;">
+    <div class="container pt-4 pt-xl-5">
+        <div class="row g-0 pt-5">
             <div class="col-md-8 col-xl-6 text-center text-md-start mx-auto">
                 <div class="text-center">
-                    <h1 class="fw-bold text-white" style="text-align: left;padding: 0px;margin: 0px;margin-right: 10px;padding-left: 18px;margin-left: 15px;">A la recherche du bon service de réparation mécanique ?<br /><br /></h1>
-                    <a href="{{ path('app_contact') }}" class="btn btn-primary" type="button" style="padding-top: 10px;margin-bottom: 46px;margin-top: 42px;margin-left: 20px;margin-right: 20px;">CONTACTER</a>
+                    <h1>A la recherche d'un bon service de réparation mécanique ?<br /><br /></h1>
+                    <a href="{{ path('app_contact') }}" class="btn btn-secondary" type="button" >CONTACTER</a>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!--Service Cards -->
-
-<section>
+<section class="cards">
     <div class="container">
         <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 mt-5">
             <div class="col">
                 <div class="content">
                     <div class="content-overlay"></div>
-                    <img class="content-image" src="assets/images/Card1.png" alt="Card Image">
+                    <img class="content-image"  src={{ asset('build/images/Card1.png') }} alt="Image garage">
                     <div class="content-details">
-                        <img src="assets/icons/chain.svg" alt="icône chaîne">
-                        <h3>Entretien préventif des véhicules</h3>
+                        <a href="{{ path('app_services') }}">
+                            <img src={{ asset('build/images/icons/chain.svg') }} alt="icône chaîne">
+                        </a>
+                        <h3 class="card-title">Entretien préventif des véhicules</h3>
                     </div>
                 </div>
             </div>
             <div class="col">
                 <div class="content">
                     <div class="content-overlay"></div>
-                    <img class="content-image" src="assets/images/Card1.png" alt="Card Image">
+                    <img class="content-image" src={{ asset('build/images/Card2.png') }} alt="Image garage">
                     <div class="content-details">
-                        <img src="assets/icons/garage.svg" alt="icône garage">
-                        <h3>Réparation et entretien généraux de l'automobile</h3>
+                        <a href="{{ path('app_services') }}">
+                            <img src={{ asset('build/images/icons/garage.svg') }} alt="icône garage">
+                        </a>
+                        <h3 class="card-title">Réparation et entretien généraux de l'automobile</h3>
                     </div>
                 </div>
             </div>
             <div class="col">
                 <div class="content">
                     <div class="content-overlay"></div>
-                    <img class="content-image" src="assets/images/Card1.png" alt="Card Image">
+                    <img class="content-image" src={{ asset('build/images/Card3.png') }} alt="Image garage">
                     <div class="content-details">
-                        <img src="assets/icons/engine.svg" alt="icône moteur">
-                        <h3>Réparation de la transmission</h3>
+                        <a href="{{ path('app_services') }}">
+                            <img src={{ asset('build/images/icons/engine.svg') }} alt="icône moteur">
+                        </a>
+                        <h3 class="card-title">Réparation de la transmission</h3>
                     </div>
                 </div>
             </div>
             <div class="col">
                 <div class="content">
                     <div class="content-overlay"></div>
-                    <img class="content-image" src="assets/images/Card1.png" alt="Card Image">
+                    <img class="content-image" src={{ asset('build/images/Card4.png') }} alt="Image garage">
                     <div class="content-details">
-                        <img src="assets/icons/electric.svg" alt="">
-                        <h3>Diagnostic électrique</h3>
+                        <a href="{{ path('app_services') }}">
+                            <img src={{ asset('build/images/icons/electric.svg') }} alt="machine electrique">
+                        </a>
+                        <h3 class="card-title">Diagnostic électrique</h3>
                     </div>
                 </div>
             </div>
         </div>
 </div>
-
 </section>
 
 
-<!--Services -->
-<section class="container m-2" id="services">
-    <div class="row text-center">
-        <a class="col" href="{{ path('app_services') }}"> <button class="btn btn-primary mt-5"> CONNAÎTRE TOUS NOS SERVICES</button></a>
-    </div> 
-</section>
-
-<section class="container pt-4 pt-xl-5 text-white">
-    <div class="row row-cols-1 row-cols-lg-2 py-5 text-center">
-        <div class="col mx-auto lead">
-            <h1 class="text">Les nombreux services de réparation automobile que nous vous offrons</h1>
-            <div>
-                <img src="assets/icons/calendar.svg" alt="icon calendrier">
-                <a href="{{ path('app_contact') }}" class="btn btn-primary mx-2 mt-3"> PRENDRE UN RENDEZ-VOUS</a>
+<section class="services">
+    <div class=" container m-2" id="services">
+        <div class="row text-center">
+            <a class="col" href="{{ path('app_services') }}"> <button class="btn btn-primary mt-5"> CONNAÎTRE TOUS NOS SERVICES</button></a>
+        </div> 
+    </div>
+    <div class="container pt-4 pt-xl-5">
+        <div class="row row-cols-1 row-cols-lg-2 py-5 align-items-center text-center">
+            <div class="col mx-auto lead">
+                <h2 class="text">Les nombreux services de réparation automobile que nous vous offrons</h2>
+                <div>
+                    <img src={{ asset('build/images/icons/calendar.svg') }} alt="icon calendrier">
+                    <a href="{{ path('app_contact') }}" class="btn btn-primary mx-2 mt-3"> PRENDRE UN RENDEZ-VOUS</a>
+                </div>
             </div>
-        </div>
-        <div class="col mx-auto mt-5">
-            <p>
-                Rencontrez l'équipe de mécaniciens qualifiés avec plus de 5 ans d'expérience immaculée dans l'industrie de la réparation automobile ! Nous n'utilisons que des pièces de première qualité et nous nous efforçons de rendre vos voyages sûrs et confortables ! Nous sommes toujours heureux de vous aider dans ces tâches.    
-            </p>
+            <div class="col mx-auto mt-5">
+                <p>
+                    Rencontrez l'équipe de mécaniciens qualifiés avec plus de 5 ans d'expérience immaculée dans l'industrie de la réparation automobile ! Nous n'utilisons que des pièces de première qualité et nous nous efforçons de rendre vos voyages sûrs et confortables ! Nous sommes toujours heureux de vous aider dans ces tâches.    
+                </p>
+            </div>
         </div>
     </div>
 </section>
-    
-<section class="container pt-4 pt-xl-5 text-white">
-    <div class="row row-cols-1 row-cols-lg-2 py-5 text-center">
+
+<section class=" gallery container pt-4 pt-xl-5 text-white text-center">
+    <h2 class="">A la recherche d’une nouvelle voiture?</h2>
+    <div class="row row-cols-1 row-cols-lg-2 py-5">
         <div class="col">
-            <h1 class="text">A la recherche d’une nouvelle voiture?</h1>
-            <img src="assets/images/catalog.jpg" alt="Image de voitures" width="500vw">
+            <img src={{ asset('build/images/Catalog.jpg') }} alt="Image de voitures" width="500vw">
         </div>
         <div class="col mt-5">
             <div class="col mt-5 mx-auto lead">
-                <h1>
+                <h2>
                     Trouvez la voiture parfaite    
-                </h1>
-                <ul>
-                    <li><img src="assets/icons/star.svg" alt="icon star">Voitures reconditionnées et garanties</li>
-                    <li><img src="assets/icons/star.svg" alt="icon star">Financement complet ou partiel</li>
-                    <li><img src="assets/icons/star.svg" alt="icon star">Possibilité d'essai avant l'achat</li>
-                    <li><img src="assets/icons/star.svg" alt="icon star">Offre de reprise toutes marques</li>
-                </ul>
-                <a href="{{ path('app_contact') }}" class="btn btn-primary mt-5"> PRENDRE UN RENDEZ-VOUS</a>
+                </h2>
+                <div class=" list d-flex justify-content-center">
+                    <div class=" d-flex flex-column">
+                        <img src={{ asset('build/images/icons/star.svg') }} alt="icon star">
+                        <img src={{ asset('build/images/icons/star.svg') }} alt="icon star">
+                        <img src={{ asset('build/images/icons/star.svg') }} alt="icon star">
+                        <img src={{ asset('build/images/icons/star.svg') }} alt="icon star">
+                    </div>
+                    <div>
+                        <h5>Voitures reconditionnées et garanties</h5>
+                        <h5>Financement complet ou partiel</h5>
+                        <h5>Possibilité d'essai avant l'achat</h5>
+                        <h5> Offre de reprise toutes marques</h5>
+                    </div>
+                </div>
+                <a href="{{ path('app_contact') }}" class="btn btn-white mt-5"> PRENDRE UN RENDEZ-VOUS</a>
             </div>
         </div>
     </div>
 </section>
+
 <section class="comments">
     <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 justify-content-center g-4 py-5">
         {% for comment in comments %}
         <div class="card col mx-3" style="width: 18rem;">
             <div class="card-body">
-                <h5 class="card-title">{{ comment.lastname }} {{ comment.name }}</h5>
+                <h6 class="comment-title">{{ comment.lastname }} {{ comment.name }}</h6>
                 <span class="comment-rating" data-rating="{{ comment.rating }}"></span>
                 <p class="card-text">{{ comment.message }}</p>
                 <p>{{ comment.createdAt|date('Y-m-d H:i:s') }}</p>
@@ -131,7 +143,8 @@
         {% endfor %}
     </div>
     <div class="text-center">
-        <a href="{{ path('app_comment') }}" class="btn btn-primary mt-5"> LAISSER UN COMMENTAIRE</a>
+        <a href="{{ path('app_comment') }}" class="btn btn-primary my-3"> LAISSER UN AVIS</a>
+        <a href="{{ path('app_contact') }}" class="btn btn-secondary my-3"> PRENDRE UN RENDEZ-VOUS</a>
     </div>
 </section>
 

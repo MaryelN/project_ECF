@@ -1,0 +1,23 @@
+@use '../base/main' as *;
+
+@mixin btn {
+  border-radius: 20px 0 20px 0;
+  color: $info;
+  font-family: lalezar;
+}
+
+.btn-secondary {
+  @include btn;
+  background-color: $secondary;
+}
+
+.btn-primary {
+  @include btn;
+  background-color: $primary;
+}
+
+.btn-white {
+  @include btn;
+  background-color: $white;
+  color: $primary;
+}

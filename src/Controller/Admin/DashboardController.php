@@ -40,17 +40,12 @@ class DashboardController extends AbstractDashboardController
             ->renderContentMaximized();
     }
     public function configureMenuItems(): iterable
-    {
-        $menuItems = [
-            MenuItem::linkToDashboard('Accueil', 'fa fa-home'),
-        ];
-        if ($this->isGranted('ROLE_ADMIN')) {
-            $menuItems[] = MenuItem::section('Utilisateurs');
-            $menuItems[] = MenuItem::linkToCrud('Utilisateurs', 'fa fa-user', User::class);
-        }
-    
+    {   
+        $menuItems[] = MenuItem::linkToRoute('Retour au Site', 'fa fa-home', 'app_home');
         $menuItems[] = MenuItem::section('Site Garage');
         if ($this->isGranted('ROLE_ADMIN')) {
+            $menuItems[] = MenuItem::linkToCrud('Utilisateurs', 'fa fa-user', User::class);
+            $menuItems[] = MenuItem::linkToRoute('Registrer', 'fa fa-user', 'app_register');
             $menuItems[] = MenuItem::linkToCrud('Horaires', 'fa fa-clock', Schedule::class);
         }
         $menuItems[] = MenuItem::linkToCrud('Messages', 'fa fa-envelope', Contact::class);

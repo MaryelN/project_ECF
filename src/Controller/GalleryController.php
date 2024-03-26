@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Car\Car;
 use App\Entity\Contact;
 use App\Form\ContactType;
+use App\Repository\Car\BrandRepository;
 use App\Repository\Car\CarRepository;
 use App\Repository\ScheduleRepository;
 use App\Service\ScheduleFormatterService;
@@ -35,32 +36,87 @@ class GalleryController extends AbstractController
     public function index(
         CarRepository $carRepository, 
         PaginatorInterface $paginator, 
-        ScheduleRepository $repository,
+        ScheduleRepository $shceduleRepository,
+        BrandRepository $brandRepository,
         Request $request): Response
     {        
-        $formattedSchedules = $this->getFormattedSchedules($repository);
+        $formattedSchedules = $this->getFormattedSchedules($shceduleRepository);
 
+        // Get the page number from the request, ensuring it's a positive non-zero integer
+        $page = max(1, (int)$request->query->get('page', 1));
+
+        //on recupere les filtres
+        $filters = $request->request->get("brands");
+        
+        $cars = $carRepository->paginationQuery(6, $filters);
+
+        $totalCars = $carRepository->getTotalCars($filters);
+    
+        $brands = $brandRepository->findAll();
+
+        // Use the paginator with the corrected page number
         $cars = $paginator->paginate(
-            $carRepository->findAll(),
-            $request->query->getInt('page', 1),
-            6 
+            $carRepository->paginationQuery($page, 6, $filters),
+            $page,
+            6
         );
+
+        if($request->get('ajax')){
+            return new Response('ok');
+        }
 
         return $this->render('pages/gallery/index.html.twig', [
             'controller_name' => 'GalleryController',
             'title'=>'Gallerie',
             'cars'=> $cars,
+            'brands'=>$brands,
             'formattedSchedules'=>$formattedSchedules
         ]);
     }
+
+    #[Route('/filtre', name:'filter', methods:['POST'])]
+    public function filterCars(Request $request, CarRepository $carRepository, BrandRepository $brandRepository): Response
+    {
+         // Retrieve the raw JSON data from the request body
+    $jsonData = $request->getContent();
+
+    // Decode the JSON data
+    $data = json_decode($jsonData, true);
+
+    // Check if 'brand' is present in the decoded data
+    if (isset($data['brand'])) {
+        $brandName = $data['brand'];
+    // Trouvez l'entité de la marque correspondant au nom
+    $brand = $brandRepository->findOneBy(['name' => $brandName]);
+    
+    if (!$brand) {
+        // Si la marque n'existe pas, vous pouvez renvoyer une réponse JSON vide ou un message d'erreur
+        return $this->json(['error' => 'Marque non trouvée pour: ' . $brandName], Response::HTTP_NOT_FOUND);
+    }
+
+    // Récupérez les produits filtrés par l'ID de la marque
+    $filteredCars = $carRepository->findBy(['brand' => $brand->getId()]);
+    
+    foreach ($filteredCars as $car) {
+        dump($car->getId(), $car->getName()); // Print properties you want to check
+    }
+
+    return $this->json(['cars' => $filteredCars]);
+
+    }
+    
+    }
     
     #[Route('/{id}', name:'details')]
-    public function details(Car $car, ): Response
-    {                     
+    public function details(Car $car, ScheduleRepository $repository): Response
+    {                
+        $formattedSchedules = $this->getFormattedSchedules($repository);
+
         return $this->render('pages/gallery/details.html.twig', [
             'controller_name' => 'GalleryController',
             'title'=>'Details',
-            'car'=>$car 
+            'car'=>$car,
+            'formattedSchedules'=>$formattedSchedules 
         ]);
     }
 
@@ -70,8 +126,10 @@ class GalleryController extends AbstractController
         EntityManagerInterface $manager, 
         SendMailService $mailer, 
         Car $car, 
+        ScheduleRepository $repository
         ): Response
     {
+        $formattedSchedules = $this->getFormattedSchedules($repository);
         $contact = new Contact();
 
         $form = $this->createForm(ContactType::class, $contact);
@@ -100,7 +158,8 @@ class GalleryController extends AbstractController
         return $this->render('pages/gallery/contact.html.twig', [
             'form' => $form->createView(),
             'title' => 'Contactez-nous',
-            'car' => $car
+            'car' => $car,
+            'formattedSchedules'=>$formattedSchedules
         ]);
     }
 }

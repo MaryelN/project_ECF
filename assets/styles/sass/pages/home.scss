@@ -1,0 +1,121 @@
+@use '../base/main' as *;
+
+.hero {
+  .container {
+    background-image: url(../../../images/Hero.png); 
+    background-size: cover; 
+    background-position: center; 
+    height: 580px;
+
+    .row {
+      margin-top: 37px;
+      margin-left: -38px;
+      margin-right: 122px;
+
+      h1 {
+        color: $info;
+        text-align: left;
+        margin-right: 10px;
+        padding-left: 18px;
+        margin-left: 15px;
+      }
+    }
+  }
+}
+
+.services {
+  h2 {
+    color: $secondary;
+  }
+
+  p {
+    color: $primary;
+  }
+
+  
+}
+
+.gallery {
+  background-color: $primary;
+
+  h2 {
+    color: $info; 
+  }
+
+  h5 {
+    padding-left: 1rem;
+    text-align: left;
+  }
+}
+
+.comments {
+  img {
+    width: 15px;
+    margin: 0 5px 5px 0;
+
+  }
+  .card-title {
+    color: $primary;
+  }
+}
+.content {
+  position: relative;
+  width: 100%;
+  max-width: 400px; /* Set a maximum width for the content */
+  height: 100%;
+  margin: auto;
+  overflow: hidden;
+  border-radius: 15px;
+}
+
+.content .content-overlay {
+  background: $dark;
+  position: absolute;
+  height: 99%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  opacity: 0;
+  transition: all 0.4s ease-in-out 0s;
+}
+
+.content:hover .content-overlay {
+  opacity: 1;
+}
+
+.content-image {
+  width: 21em;
+  height: 13em;
+  object-fit: cover;
+}
+
+.content-details {
+  position: absolute;
+  text-align: center;
+  padding-left: 1em;
+  padding-right: 1em;
+  width: 100%;
+  top: 50%;
+  left: 50%;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  transition: all 0.3s ease-in-out 0s;
+}
+
+.content:hover .content-details {
+  top: 50%;
+  left: 50%;
+  opacity: 1;
+  
+}
+
+.content-details p {
+  color: $info;
+  font-size: 0.8em;
+}
+
+.fadeIn-top {
+  top: 20%;
+}
