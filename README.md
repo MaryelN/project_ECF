@@ -55,14 +55,15 @@ Il s'agit d'un site Web pour le garage automobile V. Parrot, qui fournit à l'ad
 -PHP v.8
 -Composer
 -Symfony v.5 
+-Npm
 
 
 ## Local Execution
 Suivez les étapes suivantes pour configurer et exécuter le projet localement :
 
-1. Clonez le dépôt :
+1. Clonez le dépôt 
 
-2. Assurez-vous que les technologies requises sont installées (par exemple, PHP, MySQL).
+2. Assurez-vous que les technologies requises sont installées (par exemple, PHP, MySQL, NPM).
 
 3. Naviguez jusqu'au répertoire du projet :
 
@@ -72,7 +73,7 @@ cd votre-répertoire
 
 composer install
 
-5. Configurez la base de données en utilisant les scripts SQL ou les migrations fournis.
+5. Configurez la base de données en utilisant les identifiants pour Alwaysdata.
    
 7. Modifiez les paramètres de connexion à la base de données dans le fichier de configuration.
    
